@@ -1,7 +1,8 @@
 import React from "react";
+import Header from "./components/header/Header";
 
 function App(props) {
-  return <div></div>;
+  return <Header />;
 }
 
 export default App;
