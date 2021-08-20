@@ -9,8 +9,8 @@ import {
 } from "@ant-design/icons";
 import DropDown from "./DropDown";
 import MobileSearch from "./MobileSearch";
-import logo from "../../assets/logo.png";
 import "./header.less";
+import logo from "../../assets/logo.png";
 
 function Header(props) {
   return (
@@ -24,34 +24,26 @@ function Header(props) {
         </a>
         <h1>Cola</h1>
       </Col>
-      <Col xs={0} sm={3} md={5} lg={5} xl={4} className="header__search ">
+      <Col xs={0} sm={5} md={5} lg={5} xl={4} className="header__search ">
         <Input
           placeholder="Enter your search"
           prefix={<SearchOutlined />}
           bordered={false}
         />
       </Col>
-      <Col xs={0} sm={18} md={15} lg={12} xl={10} className="header__menu">
+      <Col xs={0} sm={16} md={15} lg={12} xl={10} className="header__menu">
         <Menu mode="horizontal">
           <Menu.Item key="home" icon={<HomeOutlined />}>
-            <a href="/home" className="header__nav__link">
-              首页
-            </a>
+            <a href="/">主页</a>
           </Menu.Item>
-          <Menu.Item key="category" icon={<EditOutlined />}>
-            <a href="/" className="header__nav__link">
-              技术篇
-            </a>
+          <Menu.Item key="technology" icon={<EditOutlined />}>
+            <a href="/">技术篇</a>
           </Menu.Item>
-          <Menu.Item key="archive" icon={<FolderOpenOutlined />}>
-            <a href="/" className="header__nav__link">
-              生活篇
-            </a>
+          <Menu.Item key="life" icon={<FolderOpenOutlined />}>
+            <a href="/">生活篇</a>
           </Menu.Item>
           <Menu.Item key="author" icon={<UserOutlined />}>
-            <a href="/" className="header__nav__link">
-              关于博主
-            </a>
+            <a href="/">关于博主</a>
           </Menu.Item>
         </Menu>
       </Col>
