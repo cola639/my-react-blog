@@ -10,7 +10,7 @@ function Content(props) {
   const { article } = useContext(ArticleContext);
 
   return (
-    <section className="detail">
+    <section className="article-container">
       <nav>
         <Breadcrumb>
           <Breadcrumb.Item href="/">
@@ -22,9 +22,9 @@ function Content(props) {
         </Breadcrumb>
       </nav>
 
-      <div className="card article">
+      <div className="card blcok--white article">
         <img className="article__img" src={article.img} alt="header img" />
-        <div className="block">
+        <div>
           <h2 className="article__title">{article.title}</h2>
           <div className="article__list">
             <SvgIcon className="icon article__list__item" type="astronaut" />
@@ -33,7 +33,7 @@ function Content(props) {
               dateTime={moment(article.time).format("YYYY-MM-DD HH:mm")}
               style={{ marginLeft: "12px" }}
             >
-              <span>Time </span>
+              <span>Time: </span>
               {moment(article.time).format("YYYY-MM-DD HH:mm")}
             </time>
           </div>

@@ -7,7 +7,7 @@ import UserContext from "../../context/UserContext";
 import { getLikes, putLiked } from "../../services/likesService";
 
 function Interactive(props) {
-  const userContext = useContext(UserContext);
+  const userContext = useContext(UserContext) || [];
 
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);

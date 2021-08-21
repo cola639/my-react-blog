@@ -50,45 +50,50 @@ function Article(props) {
           pagination={false}
           dataSource={articleList}
           renderItem={(item) => (
-            <List.Item
-              key={item._id}
-              actions={[
-                <Space>
-                  <SvgIcon className="icon--small" type="kanguowo" />
-                  {item.watchers}
-                </Space>,
-
-                <Space>
-                  <SvgIcon className="icon--small" type="like" />
-                  {item.likes}
-                </Space>,
-
-                <Space>
-                  <SvgIcon className="icon--small" type="pinglun" />
-                  {item.comments}
-                </Space>,
-
-                <Space>
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: item.author.name,
-                    }}
-                  />
-                </Space>,
-              ]}
-              extra={
-                <img
-                  width={272}
-                  alt="logo"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                />
-              }
+            <div
+              className="article-list__article"
+              onClick={() => window.open(`/articles/${item._id}`)}
             >
-              <List.Item.Meta
-                title={<a href={item.href}>{item.title}</a>}
-                description={item.description}
-              />
-            </List.Item>
+              <List.Item
+                key={item._id}
+                actions={[
+                  <Space>
+                    <SvgIcon className="icon--small" type="kanguowo" />
+                    {item.watchers}
+                  </Space>,
+
+                  <Space>
+                    <SvgIcon className="icon--small" type="like" />
+                    {item.likes}
+                  </Space>,
+
+                  <Space>
+                    <SvgIcon className="icon--small" type="pinglun" />
+                    {item.comments}
+                  </Space>,
+
+                  <Space>
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: item.author.name,
+                      }}
+                    />
+                  </Space>,
+                ]}
+                extra={
+                  <img
+                    width={272}
+                    alt="logo"
+                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                  />
+                }
+              >
+                <List.Item.Meta
+                  title={<a href={item.href}>{item.title}</a>}
+                  description={item.description}
+                />
+              </List.Item>
+            </div>
           )}
         />
       </InfiniteScroll>

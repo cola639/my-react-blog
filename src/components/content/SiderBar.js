@@ -3,6 +3,7 @@ import React from "react";
 import { Avatar, Divider, Tag, Tooltip } from "antd";
 import SvgIcon from "../common/SvgIcon";
 import avatar from "../../assets/avatar.png";
+import "./siderbar.less";
 
 function SiderBar(props) {
   const data = ["node", "http"];
@@ -35,17 +36,17 @@ function SiderBar(props) {
               target="_blank"
               rel="noreferrer"
             >
-              <SvgIcon type="git" className="icon--middle" />
+              <SvgIcon type="git" className="icon" />
             </a>
           </Tooltip>
           <Tooltip title="wechat:g18826078154">
             <span>
-              <SvgIcon type="weixin" className="icon--middle" />
+              <SvgIcon type="weixin" className="icon" />
             </span>
           </Tooltip>
           <Tooltip title="QQ:337507950">
             <span>
-              <SvgIcon type="qq" className="icon--middle" />
+              <SvgIcon type="qq" className="icon" />
             </span>
           </Tooltip>
         </div>
