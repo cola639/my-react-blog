@@ -1,11 +1,10 @@
-import React from "react";
-import { Dropdown, Menu } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
-
+import React, { useState } from "react";
+import { Drawer, Menu } from "antd";
 import {
   EditOutlined,
   FolderOpenOutlined,
   UserOutlined,
+  MenuOutlined,
 } from "@ant-design/icons";
 
 const menu = (
@@ -23,12 +22,28 @@ const menu = (
 );
 
 function DropDown(props) {
+  const [visible, setVisible] = useState(false);
   return (
-    <Dropdown overlay={menu} trigger={["click"]}>
-      <a onClick={(e) => e.preventDefault()} href="/">
+    <React.Fragment>
+      <button
+        onClick={() => setVisible(true)}
+        style={{ border: 0, backgroundColor: "transparent", cursor: "pointer" }}
+      >
         <MenuOutlined className="nav__toggler" />
-      </a>
-    </Dropdown>
+      </button>
+      <Drawer
+        width="35%"
+        placement="left"
+        closable={false}
+        onClose={() => {
+          setVisible(false);
+        }}
+        visible={visible}
+        key="left"
+      >
+        {menu}
+      </Drawer>
+    </React.Fragment>
   );
 }
 

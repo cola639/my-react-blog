@@ -1,5 +1,6 @@
-import React from "react";
-import { Row, Col, Menu, Input, Button } from "antd";
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { Row, Col, Menu, Input, Button, Avatar, Dropdown } from "antd";
 import {
   HomeOutlined,
   EditOutlined,
@@ -8,11 +9,18 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import DropDown from "./DropDown";
+import SvgIcon from "../common/SvgIcon";
 import MobileSearch from "./MobileSearch";
-import "./header.less";
+import Login from "../login/Login";
+import UserContext from "../../context/UserContext";
 import logo from "../../assets/logo.png";
+import "./header.less";
 
 function Header(props) {
+  const userContext = useContext(UserContext);
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   return (
     <Row className="header" wrap={false}>
       <Col xs={2} sm={0} md={0} lg={0} xl={0} className="header__toggler">
@@ -47,15 +55,61 @@ function Header(props) {
           </Menu.Item>
         </Menu>
       </Col>
-      <Col xs={0} sm={0} md={5} lg={4} xl={6} className="header__user">
-        <Button type="primary">登陆</Button>
-        <a href="/" className="header__user__link">
-          注册
-        </a>
-      </Col>
-      <Col xs={2} sm={0} className="header__mobile__search">
+      {!userContext.user && (
+        <Col xs={0} sm={0} md={5} lg={4} xl={6} className="header__user">
+          <Button
+            type="primary"
+            onClick={() => {
+              setIsModalVisible(true);
+            }}
+          >
+            登陆
+          </Button>
+          <Link to="/sign-up" className="header__user__link">
+            注册
+          </Link>
+        </Col>
+      )}
+      {userContext.user && (
+        <Col xs={0} sm={0} md={5} lg={4} xl={6} className="header__user">
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item key="logout">
+                  <Link to="/logout">退出账户</Link>
+                </Menu.Item>
+              </Menu>
+            }
+            trigger={["click"]}
+          >
+            <Avatar size={32} style={{ cursor: "pointer" }}>
+              {userContext.user.name}
+            </Avatar>
+          </Dropdown>
+
+          <Link to="/write" className="header__user__write">
+            <SvgIcon type="fabiao1" /> 写文章
+          </Link>
+        </Col>
+      )}
+      <Col
+        xs={2}
+        sm={0}
+        className="header__mobile__search"
+        id="dropdown-header"
+      >
         <MobileSearch />
       </Col>
+
+      <Login
+        visible={isModalVisible}
+        onOk={() => {
+          setIsModalVisible(false);
+        }}
+        onCancel={() => {
+          setIsModalVisible(false);
+        }}
+      />
     </Row>
   );
 }

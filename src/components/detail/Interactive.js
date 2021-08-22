@@ -7,7 +7,7 @@ import UserContext from "../../context/UserContext";
 import { getLikes, putLiked } from "../../services/likesService";
 
 function Interactive(props) {
-  const userContext = useContext(UserContext) || [];
+  const userContext = useContext(UserContext);
 
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
@@ -38,7 +38,7 @@ function Interactive(props) {
       Events.scrollEvent.remove("begin");
       Events.scrollEvent.remove("end");
     };
-  }, [liked, userContext.user]);
+  }, [userContext.user]);
 
   async function handleLiked() {
     if (!userContext.user) {
@@ -46,7 +46,15 @@ function Interactive(props) {
     }
 
     const originalLiked = liked;
+    const originalLikes = likes;
+
+    if (originalLiked) {
+      setLikes(likes - 1);
+    } else {
+      setLikes(likes + 1);
+    }
     setLiked(!liked);
+
     try {
       await putLiked({
         _id: likesId,
@@ -57,6 +65,7 @@ function Interactive(props) {
     } catch (ex) {
       message.warn("点赞未成功哦");
       setLiked(originalLiked);
+      setLikes(originalLikes);
     }
   }
 

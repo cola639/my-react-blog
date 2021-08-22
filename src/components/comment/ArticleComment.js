@@ -70,6 +70,7 @@ function ArticleComment(props) {
                 onSubmit={handleSubmit}
                 submitting={submitting}
                 value={value}
+                userContext={userContext}
               />
             }
           />

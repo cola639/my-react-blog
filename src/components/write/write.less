@@ -1,0 +1,26 @@
+.write-back {
+  height: 32px;
+  margin: 16px;
+  display: block;
+  color: #fff;
+  text-align: center;
+  &::before {
+    content: "<-";
+    margin-left: -10px;
+    transition: margin 0.15s;
+  }
+  &:hover::before {
+    margin-right: 10px;
+  }
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+// write-add
+.write-add {
+  & > h2 {
+    text-align: center;
+  }
+}
