@@ -56,7 +56,7 @@ function Published(props) {
           <Link to={`/write/changeArticle/${articleId}`}>修改</Link>
 
           <Popconfirm
-            title="Are you sure？"
+            title="Deleted can not return,are you sure？"
             okText="Yes"
             cancelText="No"
             onConfirm={() => handleDelete(articleId)}

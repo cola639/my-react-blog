@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import BraftEditor from "braft-editor";
 import { Row, Col, Button, Input, Form } from "antd";
+import UploadImg from "./UploadImg";
 import UserContext from "../../context/UserContext";
 import { saveArticle } from "../../services/articleService";
 import { postLikes } from "../../services/likesService";
@@ -17,7 +18,6 @@ function AddArticle(props) {
       content: values.content.toHTML(), //values.content.toRaw()  or values.content.toHTML() 通过<Form.item>内"name"获得富文本内容
     };
 
-    console.log(values.content.toHTML());
     // const { data: result } = await saveArticle(newArticle);
     // await postLikes(result._id);
 
@@ -64,8 +64,9 @@ function AddArticle(props) {
           >
             <Input placeholder="请输入您的简介" />
           </Form.Item>
+
           <Form.Item name="img" label="封面图片">
-            <Input placeholder="封面图片，仅支持超链接形式" />
+            <UploadImg />
           </Form.Item>
 
           <Form.Item

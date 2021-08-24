@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import Home from "./components/home/Home";
 import Detail from "./components/detail/Detail";
+import Write from "./components/write/Write";
 import NotFound from "./components/common/NotFound";
 import Logout from "./components/logout/Logout";
 import Register from "./components/register/Register";
@@ -21,7 +22,10 @@ function App(props) {
     <UserContext.Provider value={{ user }}>
       <Switch>
         <Route path="/articles/:id" component={Detail} />
+        <Route path="/search" component={Home} />
+        <Route path="/tags" component={Home} />
         <Route path="/logout" component={Logout} />
+        <Route path="/write" component={Write} />
         <Route path="/sign-up" component={Register} />
         <Route path="/not-found" component={NotFound} />
         <Route path="/" exact component={Home} />

@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Avatar, Divider, Tag, Tooltip } from "antd";
 import SvgIcon from "../common/SvgIcon";
 import avatar from "../../assets/avatar.png";
@@ -24,7 +24,7 @@ function SiderBar(props) {
               className="tag"
               color={item.length <= 7 ? "#f50" : "#55acee"}
             >
-              <a href="/">{item}</a>
+              <Link to={`/tags/${item}`}>{item}</Link>
             </Tag>
           ))}
         </div>

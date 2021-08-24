@@ -7,7 +7,7 @@ import "./home.less";
 function Home(props) {
   return (
     <>
-      <Header />
+      <Header {...props} />
 
       <Center />
 

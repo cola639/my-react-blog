@@ -89,8 +89,20 @@ function Article(props) {
                 }
               >
                 <List.Item.Meta
-                  title={<a href={item.href}>{item.title}</a>}
-                  description={item.description}
+                  title={
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: item.title,
+                      }}
+                    />
+                  }
+                  description={
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: item.description,
+                      }}
+                    />
+                  }
                 />
               </List.Item>
             </div>

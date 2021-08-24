@@ -21,6 +21,11 @@ function Header(props) {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  function handleSearch(e) {
+    if (!e.currentTarget.value.trim()) return;
+    props.history.push(`/search?name=${e.currentTarget.value}`);
+  }
+
   return (
     <Row className="header" wrap={false}>
       <Col xs={2} sm={0} md={0} lg={0} xl={0} className="header__toggler">
@@ -37,6 +42,7 @@ function Header(props) {
           placeholder="Enter your search"
           prefix={<SearchOutlined />}
           bordered={false}
+          onPressEnter={handleSearch}
         />
       </Col>
       <Col xs={0} sm={16} md={15} lg={12} xl={10} className="header__menu">

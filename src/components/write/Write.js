@@ -5,8 +5,8 @@ import AddArticle from "./AddArticle";
 import Pubilshed from "./Pubilshed";
 import Modified from "./Modified";
 import SvgIcon from "../common/SvgIcon";
-import "./write.less";
 import "braft-editor/dist/index.css";
+import "./write.less";
 
 const { Content, Sider } = Layout;
 
