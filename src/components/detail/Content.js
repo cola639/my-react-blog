@@ -3,11 +3,11 @@ import moment from "moment";
 import { Breadcrumb } from "antd";
 import SvgIcon from "../common/SvgIcon";
 import ArticleComment from "../comment/ArticleComment";
-import ArticleContext from "../../context/ArticleContext";
+import DetailContext from "../../context/DetailContext";
 import getMarkdownData from "../../utils/markdown";
 
 function Content(props) {
-  const { article } = useContext(ArticleContext);
+  const { article } = useContext(DetailContext);
 
   return (
     <section className="article-container">

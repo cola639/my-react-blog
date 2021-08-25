@@ -93,9 +93,11 @@ function Header(props) {
             </Avatar>
           </Dropdown>
 
-          <Link to="/write" className="header__user__write">
-            <SvgIcon type="fabiao1" /> 写文章
-          </Link>
+          {(userContext.user.isAdmin || userContext.user.isAuthor) && (
+            <Link to="/write" className="header__user__write">
+              <SvgIcon type="fabiao1" /> 写文章
+            </Link>
+          )}
         </Col>
       )}
       <Col

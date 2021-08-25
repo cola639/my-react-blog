@@ -6,6 +6,7 @@ import Write from "./components/write/Write";
 import NotFound from "./components/common/NotFound";
 import Logout from "./components/logout/Logout";
 import Register from "./components/register/Register";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 import UserContext from "./context/UserContext";
 import auth from "./services/authService";
 
@@ -25,7 +26,7 @@ function App(props) {
         <Route path="/search" component={Home} />
         <Route path="/tags" component={Home} />
         <Route path="/logout" component={Logout} />
-        <Route path="/write" component={Write} />
+        <ProtectedRoute path="/write" component={Write} />
         <Route path="/sign-up" component={Register} />
         <Route path="/not-found" component={NotFound} />
         <Route path="/" exact component={Home} />
