@@ -3,10 +3,27 @@ import { apiUrl } from "./config.json";
 
 const apiEndpoint = apiUrl + "/users";
 
-export async function register(user) {
-  return await http.post(apiEndpoint, {
+function userUrl(id) {
+  return `${apiEndpoint}/${id}`;
+}
+
+export function getUsers() {
+  return http.get(apiEndpoint);
+}
+
+export function register(user) {
+  return http.post(apiEndpoint, {
     name: user.username,
     password: user.password,
     email: user.email,
   });
+}
+
+//增加或修改文章
+export function putUser(userId) {
+  return http.put(userUrl(userId));
+}
+
+export async function deleteUser(userId) {
+  return http.delete(userUrl(userId));
 }

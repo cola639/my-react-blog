@@ -32,7 +32,7 @@ function DropDown(props) {
         <MenuOutlined className="nav__toggler" />
       </button>
       <Drawer
-        width="35%"
+        width="40%"
         placement="left"
         closable={false}
         onClose={() => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Table, Image, Space, message, Popconfirm } from "antd";
+import { Table, Image, Space, message, Popconfirm, Button } from "antd";
 import { getFirstList, deleteArticle } from "../../services/articleService";
 import { deleteLikes } from "../../services/likesService";
 
@@ -61,7 +61,7 @@ function Published(props) {
             cancelText="No"
             onConfirm={() => handleDelete(articleId)}
           >
-            <Link to="/">删除</Link>
+            <Button to="/">删除</Button>
           </Popconfirm>
         </Space>
       ),

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Route, Link, Switch, Redirect } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import AddArticle from "./AddArticle";
-import Pubilshed from "./Pubilshed";
+import Management from "./Management";
+import UserManagement from "./UserManagement";
 import Modified from "./Modified";
 import SvgIcon from "../common/SvgIcon";
 import "braft-editor/dist/index.css";
@@ -19,7 +20,7 @@ function Write(props) {
     <Layout style={{ minHeight: "100vh" }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <Link to="/" className="write-back">
-          回到首页
+          首页
         </Link>
 
         <Menu theme="dark" defaultSelectedKeys={["write"]} mode="inline">
@@ -58,7 +59,8 @@ function Write(props) {
             <Switch>
               <Route path="/write/changeArticle/:id" component={Modified} />
               <Route path="/write/add-article" component={AddArticle} />
-              <Route path="/write/manage-articles" component={Pubilshed} />
+              <Route path="/write/manage-articles" component={Management} />
+              <Route path="/write/manage-users" component={UserManagement} />
               <Redirect from="/write" to="/write/add-article" />
             </Switch>
           </div>
