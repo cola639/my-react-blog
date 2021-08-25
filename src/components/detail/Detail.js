@@ -7,7 +7,7 @@ import SiderBar from "../content/SiderBar";
 import Navigation from "./Navigation";
 import Footer from "../common/Footer";
 import DetailContext from "../../context/DetailContext";
-import { getArticle } from "../../services/articleService";
+import { getArticle, putWatchers } from "../../services/articleService";
 import "./detail.less";
 
 function Detail(props) {
@@ -16,6 +16,7 @@ function Detail(props) {
   async function getArticleDetail() {
     try {
       const { data: article } = await getArticle(props.match.params.id);
+      await putWatchers(props.match.params.id);
 
       setArticle(article);
     } catch (ex) {

@@ -17,7 +17,6 @@ function Interactive(props) {
   async function getArticleLikes() {
     const { data: result } = await getLikes(props.match.params.id);
     const articleLikes = result[0]["users"];
-    console.log(result);
     setLikes(articleLikes.length);
     setLikesId(result["0"]["_id"]);
     try {

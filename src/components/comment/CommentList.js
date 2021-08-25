@@ -29,6 +29,7 @@ function CommentList(props) {
 
   return (
     <>
+      <p>{`${mapComments.length} replies`}</p>
       {mapComments.map(function (comment) {
         return (
           <CustomComment
