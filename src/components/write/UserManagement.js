@@ -134,8 +134,6 @@ class Management extends React.Component {
       {
         title: "用户名",
         dataIndex: "name",
-        //中文排序文章标题
-        sorter: (a, b) => a.title.localeCompare(b.title),
         key: "name",
         width: "30%",
         ...this.getColumnSearchProps("name"),

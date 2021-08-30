@@ -3,16 +3,24 @@ import http from "./httpService"; //面向对象导入,使用http.get
 import { apiUrl } from "./config.json";
 
 const apiEndpoint = apiUrl + "/auth";
+// const githubEndpoint = apiUrl + "/github/callback";
+
 const tokenKey = "token";
 
 http.setJwt(getJwt());
 
-//执行异步操作前加await
+// export async function loginGithub(code) {
+//   console.log(githubEndpoint, code);
+//   const { data: jwt } = await http.post(githubEndpoint, code);
+//   localStorage.setItem("token", jwt);
+// }
+
 export async function login(email, password) {
   const { data: jwt } = await http.post(apiEndpoint, { email, password });
-  localStorage.setItem("token", jwt);
+  localStorage.setItem(tokenKey, jwt);
 }
 
+//设置localStorage jwt
 export function loginWithJwt(jwt) {
   localStorage.setItem(tokenKey, jwt);
 }
@@ -30,6 +38,18 @@ export function getCurrentUser() {
   }
 }
 
+export function getCurrentPower() {
+  try {
+    const jwt = localStorage.getItem(tokenKey);
+    const user = jwtDecode(jwt);
+
+    if (user.isAdmin || user.isAuthor) return true;
+    return null;
+  } catch (ex) {
+    return null;
+  }
+}
+
 export function getJwt() {
   return localStorage.getItem(tokenKey);
 }
@@ -39,6 +59,7 @@ const auth = {
   loginWithJwt,
   getCurrentUser,
   logout,
+  getCurrentPower,
 };
 
 export default auth;

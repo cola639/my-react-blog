@@ -13,8 +13,6 @@ function Search(props) {
 
     const { data: result } = await searchArticles(query);
 
-    console.log(result);
-
     //遍历点亮关键词;
     result.map((item) => {
       item.title = brightKeyword(query.name, item.title);
@@ -30,69 +28,71 @@ function Search(props) {
   }, [props.location.search]);
 
   return (
-    <List
-      itemLayout="vertical"
-      size="large"
-      dataSource={searchResult}
-      renderItem={(item) => (
-        <div
-          className="article-list__article"
-          onClick={() => window.open(`/articles/${item._id}`)}
-        >
-          <List.Item
-            key={item._id}
-            actions={[
-              <Space>
-                <SvgIcon className="icon--small" type="kanguowo" />
-                {item.watchers}
-              </Space>,
-
-              <Space>
-                <SvgIcon className="icon--small" type="like" />
-                {item.likes}
-              </Space>,
-
-              <Space>
-                <SvgIcon className="icon--small" type="pinglun" />
-                {item.comments}
-              </Space>,
-
-              <Space>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: item.author,
-                  }}
-                />
-              </Space>,
-            ]}
-            extra={
-              <img
-                width={272}
-                alt="logo"
-                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-              />
-            }
+    <section className="card article-container">
+      <List
+        itemLayout="vertical"
+        size="large"
+        dataSource={searchResult}
+        renderItem={(item) => (
+          <div
+            className="article-list__article"
+            onClick={() => window.open(`/articles/${item._id}`)}
           >
-            <List.Item.Meta
-              title={
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: item.title,
-                  }}
+            <List.Item
+              key={item._id}
+              actions={[
+                <Space>
+                  <SvgIcon className="icon--small" type="kanguowo" />
+                  {item.watchers}
+                </Space>,
+
+                <Space>
+                  <SvgIcon className="icon--small" type="like" />
+                  {item.likes}
+                </Space>,
+
+                <Space>
+                  <SvgIcon className="icon--small" type="pinglun" />
+                  {item.comments}
+                </Space>,
+
+                <Space>
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: item.author,
+                    }}
+                  />
+                </Space>,
+              ]}
+              extra={
+                <img
+                  width={272}
+                  alt="logo"
+                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
                 />
               }
-              description={
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: item.description,
-                  }}
-                />
-              }
-            />
-          </List.Item>
-        </div>
-      )}
-    />
+            >
+              <List.Item.Meta
+                title={
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: item.title,
+                    }}
+                  />
+                }
+                description={
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: item.description,
+                    }}
+                  />
+                }
+              />
+            </List.Item>
+          </div>
+        )}
+      />
+    </section>
   );
 }
 

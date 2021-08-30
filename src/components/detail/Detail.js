@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col } from "antd";
+import { withRouter } from "react-router-dom";
+import { Row, Col, Spin } from "antd";
 import Header from "../header/Header";
 import Interactive from "./Interactive";
 import Content from "./Content";
 import SiderBar from "../content/SiderBar";
 import Navigation from "./Navigation";
 import Footer from "../common/Footer";
+import Title from "../common/Title";
 import DetailContext from "../../context/DetailContext";
-import { getArticle, putWatchers } from "../../services/articleService";
+import { getArticle } from "../../services/articleService";
 import "./detail.less";
 
 function Detail(props) {
@@ -15,13 +17,12 @@ function Detail(props) {
 
   async function getArticleDetail() {
     try {
-      const { data: article } = await getArticle(props.match.params.id);
-      await putWatchers(props.match.params.id);
+      const { data: result } = await getArticle(props.match.params.id);
 
-      setArticle(article);
+      setArticle(result);
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
-        return props.history.push("/not-found");
+        return props.history.replace("/not-found");
     }
   }
 
@@ -29,9 +30,24 @@ function Detail(props) {
     getArticleDetail();
   }, []);
 
+  if (article.length)
+    return (
+      <Spin
+        tip="加载中"
+        size="large"
+        style={{
+          position: "fixed",
+          top: "10rem",
+          left: "50%",
+          zIndex: "999",
+        }}
+      />
+    );
+
   return (
     <React.Fragment>
       <DetailContext.Provider value={{ article }}>
+        <Title title={article.title} />
         <Header />
 
         <Row
@@ -54,4 +70,4 @@ function Detail(props) {
   );
 }
 
-export default Detail;
+export default withRouter(Detail);

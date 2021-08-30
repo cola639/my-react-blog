@@ -2,6 +2,7 @@ import http from "./httpService"; //面向对象导入,使用http.get
 import { apiUrl } from "./config.json";
 
 const apiEndpoint = apiUrl + "/users";
+const githubEndpoint = apiUrl + "/github/callback";
 
 function userUrl(id) {
   return `${apiEndpoint}/${id}`;
@@ -9,6 +10,10 @@ function userUrl(id) {
 
 export function getUsers() {
   return http.get(apiEndpoint);
+}
+
+export function github(code) {
+  return http.post(githubEndpoint, code);
 }
 
 export function register(user) {

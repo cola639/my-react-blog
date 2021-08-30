@@ -5,6 +5,7 @@ import AddArticle from "./AddArticle";
 import Management from "./Management";
 import UserManagement from "./UserManagement";
 import Modified from "./Modified";
+import Title from "../common/Title";
 import SvgIcon from "../common/SvgIcon";
 import "braft-editor/dist/index.css";
 import "./write.less";
@@ -13,15 +14,20 @@ const { Content, Sider } = Layout;
 
 function Write(props) {
   const [collapsed, setcollapsed] = useState(false);
-  const onCollapse = (collapsed) => {
-    setcollapsed(collapsed);
-  };
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-        <Link to="/" className="write-back">
+      <Title title="文章后台" />
+      <Sider
+        collapsible
+        collapsed={collapsed}
+        onCollapse={(collapsed) => {
+          setcollapsed(collapsed);
+        }}
+      >
+        <a href="/" className="write-back">
           首页
-        </Link>
+        </a>
 
         <Menu theme="dark" defaultSelectedKeys={["write"]} mode="inline">
           <Menu.Item
@@ -41,12 +47,6 @@ function Write(props) {
             icon={<SvgIcon type="yonghu" className="icon--small" />}
           >
             <Link to="/write/manage-users">管理用户</Link>
-          </Menu.Item>
-          <Menu.Item
-            key="tag"
-            icon={<SvgIcon type="zhuce" className="icon--small" />}
-          >
-            <Link to="/write/manage-users">标签管理</Link>
           </Menu.Item>
         </Menu>
       </Sider>

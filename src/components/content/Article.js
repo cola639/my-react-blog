@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
-import { List, Space, Divider } from "antd";
+import { List, Space, Divider, Spin } from "antd";
 import SvgIcon from "../common/SvgIcon";
 import { getFirstList, getMoreList } from "../../services/articleService";
 
@@ -36,6 +36,20 @@ function Article(props) {
     setLoading(false);
   }
 
+  if (!articleList.length)
+    return (
+      <Spin
+        size="large"
+        style={{
+          position: "fixed",
+          top: "10rem",
+          left: "50%",
+          zIndex: "999",
+          fontSize: "50px",
+        }}
+      />
+    );
+
   return (
     <section className="card article-container">
       <InfiniteScroll
@@ -52,7 +66,7 @@ function Article(props) {
           renderItem={(item) => (
             <div
               className="article-list__article"
-              onClick={() => window.open(`/articles/${item._id}`)}
+              onClick={() => props.history.push(`/articles/${item._id}`)}
             >
               <List.Item
                 key={item._id}
@@ -80,13 +94,7 @@ function Article(props) {
                     />
                   </Space>,
                 ]}
-                extra={
-                  <img
-                    width={272}
-                    alt="logo"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                  />
-                }
+                extra={<img width={272} alt="logo" src={item.img} />}
               >
                 <List.Item.Meta
                   title={

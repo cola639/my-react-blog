@@ -1,5 +1,5 @@
 import React from "react";
-import "./footer.less";
+import "./commonCss/footer.less";
 
 function Footer(props) {
   return (

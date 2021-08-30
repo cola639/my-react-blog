@@ -4,6 +4,7 @@ import { Form, Input, Checkbox, Button, Divider } from "antd";
 import SvgIcon from "../common/SvgIcon";
 import { register } from "../../services/userService";
 import auth from "../../services/authService";
+import { oauth_url, client_id } from "../../services/config.json";
 import "./register.less";
 
 function Register(props) {
@@ -29,10 +30,16 @@ function Register(props) {
     }
   }
 
+  function handleOAuth() {
+    window.location.href = `${oauth_url}?client_id=${client_id}`;
+
+    //get code post then return homepage
+  }
+
   return (
     <React.Fragment>
-      <h2>注册新用户</h2>
       <div className="register__card">
+        <h2>注册用户</h2>
         <Form
           name="basic"
           onFinish={onFinish}
@@ -57,20 +64,40 @@ function Register(props) {
                 message: "请输入您的密码",
               },
             ]}
+            hasFeedback
           >
-            <Input type="password" size="large" placeholder="输入用户密码" />
+            <Input.Password
+              type="password"
+              size="large"
+              placeholder="输入用户密码"
+            />
           </Form.Item>
           <Form.Item
             name="confirm"
+            dependencies={["password"]}
+            hasFeedback
             rules={[
               {
                 required: true,
-                message: "确认您的密码",
+                message: "Please confirm your password!",
               },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error(
+                      "The two passwords that you entered do not match!"
+                    )
+                  );
+                },
+              }),
             ]}
           >
             <Input type="password" size="large" placeholder="确认您的密码" />
           </Form.Item>
+
           <Form.Item
             name="email"
             rules={[
@@ -118,9 +145,12 @@ function Register(props) {
         </Form>
         {error && <span style={{ color: "red" }}>{error}</span>}
         <Divider>Github授权登陆</Divider>
-        <a href="/">
+        <button
+          onClick={handleOAuth}
+          style={{ border: "none", cursor: "pointer" }}
+        >
           <SvgIcon type="git" />
-        </a>
+        </button>
       </div>
     </React.Fragment>
   );

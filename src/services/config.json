@@ -1,3 +1,6 @@
 {
-  "apiUrl": "http://localhost:3100/api"
+  "apiUrl": "http://localhost:3100/api",
+  "oauth_url": "https://github.com/login/oauth/authorize",
+  "client_id": "2b1ecf2a5335ff97b985",
+  "client_secret": "0210faae9b2ad2ab29c5072153114b6a3cf14a22"
 }

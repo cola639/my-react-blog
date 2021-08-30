@@ -33,9 +33,9 @@ export function saveArticle(article) {
   return http.post(apiEndpoint, article);
 }
 
-export function putWatchers(articleId) {
-  return http.put(articleUrl(`watchers/${articleId}`));
-}
+// export function putWatchers(articleId) {
+//   return http.put(articleUrl(`/watchers/${articleId}`));
+// } 放在请求文章里面
 
 //删除文章
 export function deleteArticle(articleId) {

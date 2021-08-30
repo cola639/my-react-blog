@@ -17,69 +17,65 @@ function Tag(props) {
   }, [props.match.params.id]);
 
   return (
-    <List
-      itemLayout="vertical"
-      size="large"
-      dataSource={category}
-      renderItem={(item) => (
-        <div
-          className="article-list__article"
-          onClick={() => window.open(`/articles/${item._id}`)}
-        >
-          <List.Item
-            key={item._id}
-            actions={[
-              <Space>
-                <SvgIcon className="icon--small" type="kanguowo" />
-                {item.watchers}
-              </Space>,
-
-              <Space>
-                <SvgIcon className="icon--small" type="like" />
-                {item.likes}
-              </Space>,
-
-              <Space>
-                <SvgIcon className="icon--small" type="pinglun" />
-                {item.comments}
-              </Space>,
-
-              <Space>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: item.author.name,
-                  }}
-                />
-              </Space>,
-            ]}
-            extra={
-              <img
-                width={272}
-                alt="logo"
-                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-              />
-            }
+    <section className="card article-container">
+      <List
+        itemLayout="vertical"
+        size="large"
+        dataSource={category}
+        renderItem={(item) => (
+          <div
+            className="article-list__article"
+            onClick={() => window.open(`/articles/${item._id}`)}
           >
-            <List.Item.Meta
-              title={
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: item.title,
-                  }}
-                />
-              }
-              description={
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: item.description,
-                  }}
-                />
-              }
-            />
-          </List.Item>
-        </div>
-      )}
-    />
+            <List.Item
+              key={item._id}
+              actions={[
+                <Space>
+                  <SvgIcon className="icon--small" type="kanguowo" />
+                  {item.watchers}
+                </Space>,
+
+                <Space>
+                  <SvgIcon className="icon--small" type="like" />
+                  {item.likes}
+                </Space>,
+
+                <Space>
+                  <SvgIcon className="icon--small" type="pinglun" />
+                  {item.comments}
+                </Space>,
+
+                <Space>
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: item.author.name,
+                    }}
+                  />
+                </Space>,
+              ]}
+              extra={<img width={272} alt="logo" src={item.img} />}
+            >
+              <List.Item.Meta
+                title={
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: item.title,
+                    }}
+                  />
+                }
+                description={
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: item.description,
+                    }}
+                  />
+                }
+              />
+            </List.Item>
+          </div>
+        )}
+      />
+    </section>
   );
 }
 

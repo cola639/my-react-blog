@@ -80,7 +80,7 @@ function Login({ visible, onOk, onCancel }) {
           </Button>
         </Form.Item>
       </Form>
-      {error && <div>{error}</div>}
+      {error && <p>{error}</p>}
     </Modal>
   );
 }

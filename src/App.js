@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
-import Home from "./components/home/Home";
-import Detail from "./components/detail/Detail";
-import Write from "./components/write/Write";
 import NotFound from "./components/common/NotFound";
 import Logout from "./components/logout/Logout";
-import Register from "./components/register/Register";
-import ProtectedRoute from "./components/common/ProtectedRoute";
+import ProtectedRoute from "./route/ProtectedRoute";
+import { Home, Register, Detail, Write } from "./route/routeList";
 import UserContext from "./context/UserContext";
 import auth from "./services/authService";
 

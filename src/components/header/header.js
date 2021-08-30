@@ -32,10 +32,11 @@ function Header(props) {
         <DropDown />
       </Col>
       <Col xs={19} sm={3} md={3} lg={3} xl={3} className="header__brand">
-        <a href="/">
-          <img src={logo} alt="Logo" height="100%" />
-        </a>
-        <h1>Cola</h1>
+        <h1>
+          <a href="/">
+            <img src={logo} alt="Logo" height="100%" /> Cola
+          </a>
+        </h1>
       </Col>
       <Col xs={0} sm={5} md={5} lg={5} xl={4} className="header__search ">
         <Input
@@ -78,21 +79,37 @@ function Header(props) {
       )}
       {userContext.user && (
         <Col xs={0} sm={0} md={5} lg={4} xl={6} className="header__user">
-          <Dropdown
-            overlay={
-              <Menu>
-                <Menu.Item key="logout">
-                  <Link to="/logout">退出账户</Link>
-                </Menu.Item>
-              </Menu>
-            }
-            trigger={["click"]}
-          >
-            <Avatar size={32} style={{ cursor: "pointer" }}>
-              {userContext.user.name}
-            </Avatar>
-          </Dropdown>
+          <div>
+            <Dropdown
+              overlay={
+                <Menu>
+                  <Menu.Item key="logout">
+                    <Link to="/logout">退出账户</Link>
+                  </Menu.Item>
+                </Menu>
+              }
+              trigger={["click"]}
+            >
+              <span className="author-avatar">
+                {userContext.user.avatar && (
+                  <Avatar
+                    size={32}
+                    style={{ cursor: "pointer" }}
+                    src={userContext.user.avatar}
+                  />
+                )}
+                {!userContext.user.avatar && (
+                  <Avatar
+                    size={32}
+                    style={{ cursor: "pointer", backgroundColor: "#87d068" }}
+                    icon={<SvgIcon type="monkey" />}
+                  />
+                )}
+              </span>
+            </Dropdown>
 
+            <span className="author-name"> {userContext.user.name}</span>
+          </div>
           {(userContext.user.isAdmin || userContext.user.isAuthor) && (
             <Link to="/write" className="header__user__write">
               <SvgIcon type="fabiao1" /> 写文章
@@ -106,7 +123,7 @@ function Header(props) {
         className="header__mobile__search"
         id="dropdown-header"
       >
-        <MobileSearch />
+        <MobileSearch {...props} />
       </Col>
 
       <Login
