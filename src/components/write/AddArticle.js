@@ -1,13 +1,18 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import BraftEditor from "braft-editor";
 import { Row, Col, Button, Input, Form } from "antd";
 import UploadImg from "./UploadImg";
 import UserContext from "../../context/UserContext";
 import { saveArticle } from "../../services/articleService";
 import { postLikes } from "../../services/likesService";
+import getMarkdownData from "../../utils/markdown";
 
 function AddArticle(props) {
   const userContext = useContext(UserContext);
+
+  const [editorState, setEditorState] = useState(
+    BraftEditor.createEditorState()
+  );
 
   async function onFinish(values) {
     const newArticle = {
@@ -18,17 +23,18 @@ function AddArticle(props) {
       content: values.content.toHTML(), //values.content.toRaw()  or values.content.toHTML() 通过<Form.item>内"name"获得富文本内容
     };
 
-    // const { data: result } = await saveArticle(newArticle);
-    // await postLikes(result._id);
+    const { data: result } = await saveArticle(newArticle);
+    await postLikes(result._id);
+    console.log(result);
+  }
 
-    // setTimeout(() => {
-    //   props.history.push("/");
-    // }, 500);
+  function handleChange(editorState) {
+    setEditorState(editorState);
   }
 
   return (
-    <Row style={{ height: "100vh" }}>
-      <Col span={11} className="write-add">
+    <Row>
+      <Col span={12} className="write-add">
         <h2>添加新文章</h2>
         <Form onFinish={onFinish}>
           <Form.Item>
@@ -64,19 +70,8 @@ function AddArticle(props) {
           >
             <Input placeholder="请输入您的简介" />
           </Form.Item>
-          <Form.Item
-            label="文章简介"
-            name="description"
-            rules={[
-              {
-                required: true,
-                message: "标题长度不能少于10或大于60个字符",
-                min: 10,
-                max: 60,
-              },
-            ]}
-          >
-            <Input placeholder="请输入您的简介" />
+          <Form.Item name="img">
+            <UploadImg />
           </Form.Item>
 
           <Form.Item
@@ -103,14 +98,19 @@ function AddArticle(props) {
         </Form>
       </Col>
       <Col
-        span={12}
+        span={11}
         style={{
-          backgroundColor: "pink",
+          backgroundColor: "#fff",
           textAlign: "center",
           margin: "10px 10px ",
         }}
       >
-        预览区
+        <article
+          className="preview-content"
+          dangerouslySetInnerHTML={{
+            __html: getMarkdownData("预览区"),
+          }}
+        />
       </Col>
     </Row>
   );
