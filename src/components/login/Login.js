@@ -1,7 +1,9 @@
 import React, { useState, useContext } from "react";
-import { Form, Input, Checkbox, Modal, Button } from "antd";
+import { Form, Input, Checkbox, Modal, Button, Divider } from "antd";
+import SvgIcon from "../common/SvgIcon";
 import DetailContext from "../../context/DetailContext";
 import auth from "../../services/authService";
+import { oauth_url, client_id } from "../../services/config.json";
 
 //从Header.js组件导入
 function Login({ visible, onOk, onCancel }) {
@@ -21,8 +23,8 @@ function Login({ visible, onOk, onCancel }) {
     }
   }
 
-  function handleChange() {
-    setError("");
+  function handleOAuth() {
+    window.location.href = `${oauth_url}?client_id=${client_id}`;
   }
 
   return (
@@ -42,7 +44,7 @@ function Login({ visible, onOk, onCancel }) {
         initialValues={{
           remember: true,
         }}
-        onFieldsChange={handleChange}
+        onFieldsChange={() => setError("")}
         onFinish={onFinish}
       >
         <Form.Item
@@ -80,6 +82,17 @@ function Login({ visible, onOk, onCancel }) {
           </Button>
         </Form.Item>
       </Form>
+      <Divider>Github授权登陆</Divider>
+      <button
+        onClick={handleOAuth}
+        style={{
+          border: "none",
+          cursor: "pointer",
+          backgroundColor: "transparent",
+        }}
+      >
+        <SvgIcon type="git" />
+      </button>
       {error && <p>{error}</p>}
     </Modal>
   );

@@ -32,8 +32,6 @@ function Register(props) {
 
   function handleOAuth() {
     window.location.href = `${oauth_url}?client_id=${client_id}`;
-
-    //get code post then return homepage
   }
 
   return (

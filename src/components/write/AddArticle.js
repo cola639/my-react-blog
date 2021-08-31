@@ -27,8 +27,8 @@ function AddArticle(props) {
   }
 
   return (
-    <Row>
-      <Col span={15} className="write-add">
+    <Row style={{ height: "100vh" }}>
+      <Col span={11} className="write-add">
         <h2>添加新文章</h2>
         <Form onFinish={onFinish}>
           <Form.Item>
@@ -64,9 +64,19 @@ function AddArticle(props) {
           >
             <Input placeholder="请输入您的简介" />
           </Form.Item>
-
-          <Form.Item name="img" label="封面图片">
-            <UploadImg />
+          <Form.Item
+            label="文章简介"
+            name="description"
+            rules={[
+              {
+                required: true,
+                message: "标题长度不能少于10或大于60个字符",
+                min: 10,
+                max: 60,
+              },
+            ]}
+          >
+            <Input placeholder="请输入您的简介" />
           </Form.Item>
 
           <Form.Item
@@ -91,6 +101,16 @@ function AddArticle(props) {
             <BraftEditor placeholder="请输入正文内容" />
           </Form.Item>
         </Form>
+      </Col>
+      <Col
+        span={12}
+        style={{
+          backgroundColor: "pink",
+          textAlign: "center",
+          margin: "10px 10px ",
+        }}
+      >
+        预览区
       </Col>
     </Row>
   );
