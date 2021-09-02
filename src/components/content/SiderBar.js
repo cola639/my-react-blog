@@ -6,7 +6,7 @@ import avatar from "../../assets/avatar.png";
 import "./siderbar.less";
 
 function SiderBar(props) {
-  const data = ["node", "http"];
+  const data = ["Node", "Js", "Http", "React", "MongoDB", "Webpack"];
 
   return (
     <div className="card siderbar">
@@ -22,7 +22,7 @@ function SiderBar(props) {
             <Tag
               key={item}
               className="tag"
-              color={item.length <= 7 ? "#f50" : "#55acee"}
+              color={item.length <= 4 && item.length > 2 ? "#f50" : "#55acee"}
             >
               <Link to={`/tags/${item}`}>{item}</Link>
             </Tag>

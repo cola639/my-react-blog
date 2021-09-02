@@ -4,6 +4,7 @@ import { message, Spin } from "antd";
 import Header from "../header/Header";
 import Center from "../content/Center";
 import Footer from "../common/Footer";
+import BackTop from "../common/BackTop";
 import auth from "../../services/authService";
 import { github } from "../../services/userService";
 import "./home.less";
@@ -52,6 +53,7 @@ function Home(props) {
       {!query.code && <Center />}
 
       <Footer />
+      <BackTop />
     </>
   );
 }

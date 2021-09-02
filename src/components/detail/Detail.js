@@ -8,8 +8,10 @@ import SiderBar from "../content/SiderBar";
 import Navigation from "./Navigation";
 import Footer from "../common/Footer";
 import Title from "../common/Title";
+import BackTop from "../common/BackTop";
 import DetailContext from "../../context/DetailContext";
 import { getArticle } from "../../services/articleService";
+
 import "./detail.less";
 
 function Detail(props) {
@@ -37,7 +39,7 @@ function Detail(props) {
         <Header />
 
         <Row
-          className="container block  main detail-container"
+          className="container--big block  main detail-container"
           justify="space-between"
         >
           <Interactive {...props} />
@@ -63,6 +65,7 @@ function Detail(props) {
         </Row>
 
         <Footer />
+        <BackTop />
       </DetailContext.Provider>
     </React.Fragment>
   );

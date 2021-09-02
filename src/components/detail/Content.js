@@ -4,7 +4,8 @@ import { Breadcrumb } from "antd";
 import SvgIcon from "../common/SvgIcon";
 import ArticleComment from "../comment/ArticleComment";
 import DetailContext from "../../context/DetailContext";
-import getMarkdownData from "../../utils/markdown";
+import MarkdownData from "../../utils/markdown";
+import { imgUrl } from "../../services/config.json";
 
 function Content(props) {
   const { article } = useContext(DetailContext);
@@ -23,7 +24,11 @@ function Content(props) {
       </nav>
 
       <div className="card blcok--white article">
-        <img className="article__img" src={article.img} alt="header img" />
+        <img
+          className="article__img"
+          src={`${imgUrl}${article.img}`}
+          alt="header img"
+        />
         <div>
           <h2 className="article__title">{article.title}</h2>
           <div className="article__list">
@@ -40,7 +45,7 @@ function Content(props) {
           <article
             className="article__content"
             dangerouslySetInnerHTML={{
-              __html: getMarkdownData(article.content ? article.content : ""),
+              __html: MarkdownData(article.content ? article.content : ""),
             }}
           />
           <ArticleComment {...props} />

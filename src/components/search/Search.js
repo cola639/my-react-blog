@@ -4,6 +4,7 @@ import queryString from "query-string";
 import SvgIcon from "../common/SvgIcon";
 import { searchArticles } from "../../services/searchService";
 import brightKeyword from "../../utils/brightKeyword";
+import { imgUrl } from "../../services/config.json";
 
 function Search(props) {
   const [searchResult, setSearchResult] = useState();
@@ -66,9 +67,9 @@ function Search(props) {
               ]}
               extra={
                 <img
-                  width={272}
+                  style={{ width: "20rem" }}
                   alt="logo"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                  src={`${imgUrl}${item.img}`}
                 />
               }
             >
