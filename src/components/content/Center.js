@@ -4,6 +4,7 @@ import { Row, Col } from "antd";
 import Article from "./Article";
 import Tag from "../common/Tag";
 import Search from "../search/Search";
+import Me from "../me/Me";
 import SiderBar from "./SiderBar";
 import "./center.less";
 
@@ -14,6 +15,7 @@ function Center(props) {
         <Switch>
           <Route path="/tags/:id" component={Tag} />
           <Route path="/search" component={Search} />
+          <Route path="/me" component={Me} />
           <Route path="/" exact component={Article} />
         </Switch>
       </Col>

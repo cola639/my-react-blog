@@ -30,20 +30,6 @@ function Detail(props) {
     getArticleDetail();
   }, []);
 
-  if (article.length)
-    return (
-      <Spin
-        tip="加载中"
-        size="large"
-        style={{
-          position: "fixed",
-          top: "10rem",
-          left: "50%",
-          zIndex: "999",
-        }}
-      />
-    );
-
   return (
     <React.Fragment>
       <DetailContext.Provider value={{ article }}>
@@ -56,7 +42,19 @@ function Detail(props) {
         >
           <Interactive {...props} />
           <Col xs={24} sm={17} md={17} lg={17} xl={16}>
-            <Content {...props} />
+            {!article.content && (
+              <Spin
+                tip="加载中"
+                size="large"
+                style={{
+                  position: "fixed",
+                  top: "10rem",
+                  left: "50%",
+                  zIndex: "999",
+                }}
+              />
+            )}
+            {article.content && article.img && <Content {...props} />}
           </Col>
           <Col xs={0} sm={6} md={6} lg={6} xl={7} className="detail-siderbar">
             <SiderBar />

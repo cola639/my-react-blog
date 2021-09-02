@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Route, Link, Switch, Redirect } from "react-router-dom";
 import { Layout, Menu } from "antd";
-import AddArticle from "./AddArticle";
+import WriteArticle from "./WriteArticle";
 import Management from "./Management";
 import UserManagement from "./UserManagement";
+import TagManagement from "./TagManagement";
 import Modified from "./Modified";
 import Title from "../common/Title";
 import SvgIcon from "../common/SvgIcon";
@@ -48,6 +49,12 @@ function Write(props) {
           >
             <Link to="/write/manage-users">管理用户</Link>
           </Menu.Item>
+          <Menu.Item
+            key="tag"
+            icon={<SvgIcon type="zhuce" className="icon--small" />}
+          >
+            <Link to="/write/manage-tag">标签管理</Link>
+          </Menu.Item>
         </Menu>
       </Sider>
       <Layout className="site-layout">
@@ -58,9 +65,11 @@ function Write(props) {
           >
             <Switch>
               <Route path="/write/changeArticle/:id" component={Modified} />
-              <Route path="/write/add-article" component={AddArticle} />
+              <Route path="/write/add-article" component={WriteArticle} />
+              <Route path="/write/manage-tags" component={WriteArticle} />
               <Route path="/write/manage-articles" component={Management} />
               <Route path="/write/manage-users" component={UserManagement} />
+
               <Redirect from="/write" to="/write/add-article" />
             </Switch>
           </div>

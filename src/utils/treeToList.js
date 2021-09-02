@@ -29,7 +29,7 @@ export function translateTree(data) {
 
   //取出首条评论根节点
   data.map((item) => {
-    if (item.comment_parent == 0) {
+    if (item.comment_parent === "0") {
       return parent.push(item);
     } else {
       return children.push(item);

@@ -52,13 +52,13 @@ function Header(props) {
             <a href="/">主页</a>
           </Menu.Item>
           <Menu.Item key="technology" icon={<EditOutlined />}>
-            <a href="/">技术篇</a>
+            <Link to="/tags/technology">技术篇</Link>
           </Menu.Item>
           <Menu.Item key="life" icon={<FolderOpenOutlined />}>
-            <a href="/">生活篇</a>
+            <Link to="/tags/life">技术篇</Link>
           </Menu.Item>
           <Menu.Item key="author" icon={<UserOutlined />}>
-            <a href="/">关于博主</a>
+            <Link to="/me">关于博主</Link>
           </Menu.Item>
         </Menu>
       </Col>

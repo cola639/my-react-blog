@@ -4,8 +4,8 @@ import { apiUrl } from "./config.json";
 const apiEndpoint = apiUrl + "/articles";
 
 //获取分类
-export function searchCategory(articleId) {
-  return http.get(apiEndpoint + "/category/" + articleId);
+export function searchCategory(category) {
+  return http.get(apiEndpoint + "/category/" + category);
 }
 
 //搜索文章

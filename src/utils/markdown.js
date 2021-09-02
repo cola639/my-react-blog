@@ -1,10 +1,9 @@
 import marked from "marked";
 import hljs from "highlight.js";
 
-export default function getMarkdownData(content) {
-  const renderer = new marked.Renderer();
+export default function MarkdownData(content) {
   marked.setOptions({
-    renderer: renderer,
+    renderer: marked.Renderer(),
     gfm: true,
     pedantic: false,
     sanitize: false,
@@ -12,8 +11,8 @@ export default function getMarkdownData(content) {
     breaks: false,
     smartLists: true,
     smartypants: false,
-    highlight: function (code) {
-      return hljs.highlightAuto(code).value;
+    highlight: function (content) {
+      return hljs.highlightAuto(content).value;
     },
   });
   return marked(content);

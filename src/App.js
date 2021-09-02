@@ -20,6 +20,7 @@ function App(props) {
     <UserContext.Provider value={{ user }}>
       <Switch>
         <Route path="/articles/:id" component={Detail} />
+        <Route path="/me" component={Home} />
         <Route path="/search" component={Home} />
         <Route path="/tags" component={Home} />
         <Route path="/logout" component={Logout} />

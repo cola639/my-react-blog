@@ -17,7 +17,7 @@ function Search(props) {
     result.map((item) => {
       item.title = brightKeyword(query.name, item.title);
       item.author = brightKeyword(query.name, item.author.name);
-      item.content = brightKeyword(query.name, item.content);
+      return (item.content = brightKeyword(query.name, item.content));
     });
 
     setSearchResult(result);
