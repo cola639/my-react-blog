@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { List, Space } from "antd";
 import SvgIcon from "./SvgIcon";
 import { searchCategory } from "../../services/searchService";
+import { imgUrl } from "../../services/config.json";
 
 function Tag(props) {
   const [category, setCategory] = useState("");
@@ -53,7 +54,13 @@ function Tag(props) {
                   />
                 </Space>,
               ]}
-              extra={<img width={272} alt="logo" src={item.img} />}
+              extra={
+                <img
+                  style={{ width: "20rem" }}
+                  alt="logo"
+                  src={`${imgUrl}${item.img}`}
+                />
+              }
             >
               <List.Item.Meta
                 title={

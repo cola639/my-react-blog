@@ -3,6 +3,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import { List, Space, Divider, Spin } from "antd";
 import SvgIcon from "../common/SvgIcon";
 import { getFirstList, getMoreList } from "../../services/articleService";
+import { imgUrl } from "../../services/config.json";
 
 function Article(props) {
   //设置useState
@@ -94,7 +95,13 @@ function Article(props) {
                     />
                   </Space>,
                 ]}
-                extra={<img width={272} alt="logo" src={item.img} />}
+                extra={
+                  <img
+                    style={{ width: "20rem" }}
+                    alt="logo"
+                    src={`${imgUrl}${item.img}`}
+                  />
+                }
               >
                 <List.Item.Meta
                   title={

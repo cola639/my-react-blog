@@ -3,6 +3,6 @@ import { apiUrl } from "./config.json";
 
 const apiEndpoint = apiUrl + "/upload";
 
-export function postImg(formData) {
-  return http.post(apiEndpoint, formData);
+export function postImg(img) {
+  return http.post(apiEndpoint, img);
 }

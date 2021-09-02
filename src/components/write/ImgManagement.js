@@ -1,14 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Highlighter from "react-highlight-words";
-import { Table, Input, Button, Space, message, Popconfirm, Image } from "antd";
+import { Table, Input, Button, Space, Image } from "antd";
+import UploadImg from "./UploadImg";
 import { SearchOutlined } from "@ant-design/icons";
-import { getArticles, deleteArticle } from "../../services/articleService";
-import { deleteLikes } from "../../services/likesService";
+import { getArticles } from "../../services/articleService";
 import { imgUrl } from "../../services/config.json";
-import "./management.less";
 
-class Management extends React.Component {
+class ImgManagement extends React.Component {
   state = {
     searchText: "",
     searchedColumn: "",
@@ -90,23 +88,6 @@ class Management extends React.Component {
       ),
   });
 
-  //删除数据
-  handleDelete = async (articleId) => {
-    const originalArticles = this.state.data;
-
-    const articles = this.state.data.filter((item) => item._id !== articleId);
-
-    this.setState({ data: articles });
-
-    try {
-      await deleteArticle(articleId);
-      await deleteLikes(articleId);
-    } catch (ex) {
-      if (ex.response && ex.response.status === 404) message.warn("删除失败");
-      this.setState({ data: originalArticles });
-    }
-  };
-
   //搜索
   handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -151,30 +132,11 @@ class Management extends React.Component {
           else return "图片为空";
         },
       },
-      {
-        title: "文章描述",
-        dataIndex: "description",
-        key: "description",
-      },
-      {
-        title: "操作",
-        dataIndex: "_id",
-        render: (articleId) => (
-          <Space size="middle">
-            <Link to={`/write/changeArticle/${articleId}`} className="ant-btn">
-              修改
-            </Link>
 
-            <Popconfirm
-              title="Deleted can not return,are you sure？"
-              okText="Yes"
-              cancelText="No"
-              onConfirm={() => this.handleDelete(articleId)}
-            >
-              <Button>删除</Button>
-            </Popconfirm>
-          </Space>
-        ),
+      {
+        title: "更换封面",
+        dataIndex: "_id",
+        render: (articleId) => <UploadImg articleId={articleId} />,
       },
     ];
     return (
@@ -193,4 +155,4 @@ class Management extends React.Component {
   }
 }
 
-export default Management;
+export default ImgManagement;

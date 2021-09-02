@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Row, Col, Input, Select, Button } from "antd";
+import { Row, Col, Input, Button, Cascader } from "antd";
 import UserContext from "../../context/UserContext";
 import { saveArticle } from "../../services/articleService";
 import { postLikes } from "../../services/likesService";
@@ -8,7 +8,35 @@ import throttle from "../../utils/throttle";
 import "./writeArticle.less";
 
 const { TextArea } = Input;
-const { Option } = Select;
+
+const options = [
+  {
+    value: "技术",
+    label: "技术",
+    children: [
+      {
+        value: "node",
+        label: "node",
+      },
+      {
+        value: "js",
+        label: "js",
+      },
+      {
+        value: "http",
+        label: "http",
+      },
+      {
+        value: "react",
+        label: "react",
+      },
+    ],
+  },
+  {
+    value: "生活",
+    label: "生活",
+  },
+];
 
 function WriteArticle(props) {
   const userContext = useContext(UserContext);
@@ -75,16 +103,14 @@ function WriteArticle(props) {
             </Col>
             <Col span={4}>
               &nbsp;
-              <Select
-                defaultValue="life"
-                size="middle"
+              <Cascader
+                style={{ maxWidth: "10rem", color: "#000" }}
+                placeholder="文章分类"
+                options={options}
                 onChange={(type) => {
                   setCategory(type);
                 }}
-              >
-                <Option value="life">生活</Option>
-                <Option value="technology">技术</Option>
-              </Select>
+              />
             </Col>
           </Row>
 

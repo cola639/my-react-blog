@@ -4,7 +4,7 @@ import { Layout, Menu } from "antd";
 import WriteArticle from "./WriteArticle";
 import Management from "./Management";
 import UserManagement from "./UserManagement";
-import TagManagement from "./TagManagement";
+import ImgManagement from "./ImgManagement";
 import Modified from "./Modified";
 import Title from "../common/Title";
 import SvgIcon from "../common/SvgIcon";
@@ -53,7 +53,7 @@ function Write(props) {
             key="tag"
             icon={<SvgIcon type="zhuce" className="icon--small" />}
           >
-            <Link to="/write/manage-tag">标签管理</Link>
+            <Link to="/write/manage-img">封面更换</Link>
           </Menu.Item>
         </Menu>
       </Sider>
@@ -66,7 +66,7 @@ function Write(props) {
             <Switch>
               <Route path="/write/changeArticle/:id" component={Modified} />
               <Route path="/write/add-article" component={WriteArticle} />
-              <Route path="/write/manage-tags" component={WriteArticle} />
+              <Route path="/write/manage-img" component={ImgManagement} />
               <Route path="/write/manage-articles" component={Management} />
               <Route path="/write/manage-users" component={UserManagement} />
 

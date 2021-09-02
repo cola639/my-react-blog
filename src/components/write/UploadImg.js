@@ -1,6 +1,7 @@
 import React from "react";
-import { Upload, Modal } from "antd";
+import { Upload, Modal, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import { putImg } from "../../services/articleService";
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -34,7 +35,20 @@ class UploadImg extends React.Component {
     });
   };
 
-  handleChange = ({ fileList }) => this.setState({ fileList });
+  handleChange = async ({ fileList }) => {
+    this.setState({ fileList });
+    try {
+      let url = this.state.fileList[0]
+        ? this.state.fileList[0]["response"]["url"]
+        : "";
+
+      const { data: result } = await putImg(this.props.articleId, { url });
+
+      if (result.msg) {
+        message.success("更换封面图成功,刷新查看");
+      }
+    } catch (error) {}
+  };
 
   render() {
     const { previewVisible, previewImage, fileList, previewTitle } = this.state;
