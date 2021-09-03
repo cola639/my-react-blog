@@ -97,7 +97,7 @@ function Article(props) {
                 ]}
                 extra={
                   <img
-                    style={{ width: "20rem" }}
+                    style={{ width: "22rem" }}
                     alt="logo"
                     src={`${imgUrl}${item.img}`}
                   />

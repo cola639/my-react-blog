@@ -15,20 +15,20 @@ const options = [
     label: "技术",
     children: [
       {
-        value: "node",
-        label: "node",
+        value: "Node",
+        label: "Node",
       },
       {
-        value: "js",
-        label: "js",
+        value: "Js",
+        label: "Js",
       },
       {
-        value: "http",
-        label: "http",
+        value: "Http",
+        label: "Http",
       },
       {
-        value: "react",
-        label: "react",
+        value: "React",
+        label: "React",
       },
     ],
   },

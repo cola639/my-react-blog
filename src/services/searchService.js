@@ -9,6 +9,6 @@ export function searchCategory(category) {
 }
 
 //搜索文章
-export function searchArticles(query) {
-  return http.post(apiEndpoint + "/search", query);
+export function searchArticles(name) {
+  return http.get(apiEndpoint + `/search?name=${name}`);
 }

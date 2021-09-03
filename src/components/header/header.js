@@ -49,7 +49,7 @@ function Header(props) {
       <Col xs={0} sm={16} md={15} lg={12} xl={10} className="header__menu">
         <Menu mode="horizontal">
           <Menu.Item key="home" icon={<HomeOutlined />}>
-            <a href="/">主页</a>
+            <Link to="/">主页</Link>
           </Menu.Item>
           <Menu.Item key="technology" icon={<EditOutlined />}>
             <Link to="/tags/technology">技术篇</Link>

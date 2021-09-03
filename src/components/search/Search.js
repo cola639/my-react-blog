@@ -12,8 +12,9 @@ function Search(props) {
   async function getSearchArticles() {
     const query = queryString.parse(props.location.search);
 
-    const { data: result } = await searchArticles(query);
+    const { data: result } = await searchArticles(query.name);
 
+    console.log(result);
     //遍历点亮关键词;
     result.map((item) => {
       item.title = brightKeyword(query.name, item.title);
@@ -37,7 +38,7 @@ function Search(props) {
         renderItem={(item) => (
           <div
             className="article-list__article"
-            onClick={() => window.open(`/articles/${item._id}`)}
+            onClick={() => props.history.push(`/articles/${item._id}`)}
           >
             <List.Item
               key={item._id}
@@ -67,7 +68,7 @@ function Search(props) {
               ]}
               extra={
                 <img
-                  style={{ width: "20rem" }}
+                  style={{ width: "22rem" }}
                   alt="logo"
                   src={`${imgUrl}${item.img}`}
                 />
