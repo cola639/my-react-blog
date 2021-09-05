@@ -1,39 +1,38 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Row, Col, Input, Button, Cascader } from "antd";
+import { Row, Col, Input, Button, Cascader, message } from "antd";
 import UserContext from "../../context/UserContext";
-import { saveArticle } from "../../services/articleService";
+import { saveArticle, getArticle } from "../../services/articleService";
 import { postLikes } from "../../services/likesService";
 import MarkdownData from "../../utils/markdown";
-import throttle from "../../utils/throttle";
 import "./writeArticle.less";
 
 const { TextArea } = Input;
 
 const options = [
   {
-    value: "技术",
+    value: "technology",
     label: "技术",
     children: [
       {
-        value: "Node",
-        label: "Node",
+        value: "node",
+        label: "node",
       },
       {
-        value: "Js",
-        label: "Js",
+        value: "js",
+        label: "js",
       },
       {
-        value: "Http",
-        label: "Http",
+        value: "http",
+        label: "http",
       },
       {
-        value: "React",
-        label: "React",
+        value: "react",
+        label: "react",
       },
     ],
   },
   {
-    value: "生活",
+    value: "life",
     label: "生活",
   },
 ];
@@ -45,11 +44,28 @@ function WriteArticle(props) {
   const [articleContent, setArticleContent] = useState("");
   const [description, setDescription] = useState("");
   const [markdownContent, setMarkdownContent] = useState("预览内容");
-  const [category, setCategory] = useState("life");
+  const [category, setCategory] = useState([]);
 
   useEffect(() => {
-    handleGetDraft();
-  }, []);
+    populateArticle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.match.params.id]);
+
+  async function populateArticle() {
+    try {
+      const articleId = props.match.params.id;
+      if (articleId === "new") return handleGetDraft();
+
+      const { data: article } = await getArticle(articleId);
+
+      setArticleTitle(article.title);
+      setArticleContent(article.content);
+      setDescription(article.description);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404)
+        props.history.replace("/not-found");
+    }
+  }
 
   async function handleSubmit() {
     const newArticle = {
@@ -60,9 +76,19 @@ function WriteArticle(props) {
       category,
     };
 
-    const { data: result } = await saveArticle(newArticle);
+    try {
+      const { data: result } = await saveArticle(newArticle);
 
-    await postLikes(result._id);
+      await postLikes(result._id);
+
+      setArticleTitle("");
+      setArticleContent("");
+      setDescription("");
+      setMarkdownContent("");
+      message.success("发布成功");
+    } catch (error) {
+      message.warn(error.response.data);
+    }
   }
 
   function handleGetDraft() {
@@ -106,10 +132,9 @@ function WriteArticle(props) {
               <Cascader
                 style={{ maxWidth: "10rem", color: "#000" }}
                 placeholder="文章分类"
+                defaultValue={category}
                 options={options}
-                onChange={(type) => {
-                  setCategory(type);
-                }}
+                onChange={(type) => setCategory(type)}
               />
             </Col>
           </Row>
@@ -137,11 +162,7 @@ function WriteArticle(props) {
               >
                 保存草稿
               </Button>
-              <Button
-                type="primary"
-                size="middle"
-                onClick={throttle(handleSubmit, 30000)}
-              >
+              <Button type="primary" size="middle" onClick={handleSubmit}>
                 发布文章
               </Button>
             </Col>

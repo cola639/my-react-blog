@@ -1,7 +1,7 @@
 import React from "react";
 import Highlighter from "react-highlight-words";
 import { Table, Input, Button, Space, Image } from "antd";
-import UploadImg from "./UploadImg";
+import UploadImg from "../common/UploadImg";
 import { SearchOutlined } from "@ant-design/icons";
 import { getArticles } from "../../services/articleService";
 import { imgUrl } from "../../services/config.json";

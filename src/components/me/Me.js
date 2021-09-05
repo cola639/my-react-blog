@@ -33,7 +33,7 @@ function Me(props) {
           技能
           <ul className="me-skill">
             <li>
-              掌握HTML5+CSS3基础,熟悉Flex布局,Grid布局,盒模型和常用CSS样式.
+              熟悉HTML5+CSS3基础,熟悉Flex布局,Grid布局,盒模型和移动端适配.
               <Rate allowHalf defaultValue={4} className="me-skill_rate" />
             </li>
             <li>
@@ -46,7 +46,7 @@ function Me(props) {
               <Rate allowHalf defaultValue={4} className="me-skill_rate" />
             </li>
             <li>
-              掌握Express+MongoDB能设计简单的数据库,进行RESTful API接口交互.
+              掌握Express+MongoDB能设计简单的中间件+数据库,进行数据交互.
               <Rate allowHalf defaultValue={3.5} className="me-skill_rate" />
             </li>
             <li>

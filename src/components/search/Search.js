@@ -14,7 +14,6 @@ function Search(props) {
 
     const { data: result } = await searchArticles(query.name);
 
-    console.log(result);
     //遍历点亮关键词;
     result.map((item) => {
       item.title = brightKeyword(query.name, item.title);
@@ -26,7 +25,7 @@ function Search(props) {
   }
 
   useEffect(() => {
-    getSearchArticles(searchResult);
+    getSearchArticles(searchResult); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.location.search]);
 
   return (

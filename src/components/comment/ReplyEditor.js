@@ -3,7 +3,7 @@ import { Form, Button, Input } from "antd";
 
 const { TextArea } = Input;
 
-function ReplyEditor({ onChange, onSubmit, submitting, value, userContext }) {
+function ReplyEditor({ onChange, onSubmit, submitting, value }) {
   return (
     <>
       <Form.Item>
@@ -15,17 +15,14 @@ function ReplyEditor({ onChange, onSubmit, submitting, value, userContext }) {
         />
       </Form.Item>
       <Form.Item>
-        {userContext.user && (
-          <Button
-            htmlType="submit"
-            loading={submitting}
-            onClick={onSubmit}
-            type="primary"
-          >
-            发布评论
-          </Button>
-        )}
-        {!userContext.user && <Button disabled>登陆才能发表评论哦</Button>}
+        <Button
+          htmlType="submit"
+          loading={submitting}
+          onClick={onSubmit}
+          type="primary"
+        >
+          发布评论
+        </Button>
       </Form.Item>
     </>
   );

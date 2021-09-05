@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Form, Input, Checkbox, Button, Divider } from "antd";
 import SvgIcon from "../common/SvgIcon";
 import { register } from "../../services/userService";
@@ -33,6 +33,8 @@ function Register(props) {
   function handleOAuth() {
     window.location.href = `${oauth_url}?client_id=${client_id}`;
   }
+
+  if (auth.getCurrentUser()) return <Redirect to="/" />;
 
   return (
     <React.Fragment>

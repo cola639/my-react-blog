@@ -2,6 +2,7 @@ import React from "react";
 import { Upload, Modal, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { putImg } from "../../services/articleService";
+import { apiUrl } from "../../services/config.json";
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -37,10 +38,13 @@ class UploadImg extends React.Component {
 
   handleChange = async ({ fileList }) => {
     this.setState({ fileList });
+
     try {
       let url = this.state.fileList[0]
         ? this.state.fileList[0]["response"]["url"]
         : "";
+
+      if (!url) return null;
 
       const { data: result } = await putImg(this.props.articleId, { url });
 
@@ -61,7 +65,7 @@ class UploadImg extends React.Component {
     return (
       <>
         <Upload
-          action="http://localhost:3100/api/upload"
+          action={`${apiUrl}/upload`}
           listType="picture-card"
           fileList={fileList}
           onPreview={this.handlePreview}

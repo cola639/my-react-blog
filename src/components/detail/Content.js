@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import moment from "moment";
-import { Breadcrumb } from "antd";
+import { Breadcrumb, Skeleton } from "antd";
 import SvgIcon from "../common/SvgIcon";
 import ArticleComment from "../comment/ArticleComment";
 import DetailContext from "../../context/DetailContext";
@@ -22,35 +22,43 @@ function Content(props) {
           </Breadcrumb.Item>
         </Breadcrumb>
       </nav>
-
-      <div className="card blcok--white article">
-        <img
-          className="article__img"
-          src={`${imgUrl}${article.img}`}
-          alt="header img"
-        />
-        <div>
-          <h2 className="article__title">{article.title}</h2>
-          <div className="article__list">
-            <SvgIcon className="icon article__list__item" type="astronaut" />
-            {article.author ? article.author.name : ""}
-            <time
-              dateTime={moment(article.time).format("YYYY-MM-DD HH:mm")}
-              style={{ marginLeft: "12px" }}
-            >
-              <span>Time: </span>
-              {moment(article.time).format("YYYY-MM-DD HH:mm")}
-            </time>
+      {article.content ? (
+        <div className=" card blcok--white article">
+          {article.img ? (
+            <img
+              className="article__img"
+              style={{ width: "22rem" }}
+              alt="header img"
+              src={`${imgUrl}${article.img}`}
+            />
+          ) : null}
+          <div>
+            <h2 className="article__title">{article.title}</h2>
+            <div className="article__list">
+              <SvgIcon className="icon article__list__item" type="astronaut" />
+              {article.author ? article.author.name : ""}
+              <time
+                dateTime={moment(article.time).format("YYYY-MM-DD HH:mm")}
+                style={{ marginLeft: "12px" }}
+              >
+                <span>Time: </span>
+                {moment(article.time).format("YYYY-MM-DD HH:mm")}
+              </time>
+            </div>
+            <article
+              className="article__content"
+              dangerouslySetInnerHTML={{
+                __html: MarkdownData(article.content ? article.content : ""),
+              }}
+            />
+            <ArticleComment {...props} />
           </div>
-          <article
-            className="article__content"
-            dangerouslySetInnerHTML={{
-              __html: MarkdownData(article.content ? article.content : ""),
-            }}
-          />
-          <ArticleComment {...props} />
         </div>
-      </div>
+      ) : (
+        <div>
+          <Skeleton />
+        </div>
+      )}
     </section>
   );
 }

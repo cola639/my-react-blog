@@ -161,7 +161,7 @@ class Management extends React.Component {
         dataIndex: "_id",
         render: (articleId) => (
           <Space size="middle">
-            <Link to={`/write/changeArticle/${articleId}`} className="ant-btn">
+            <Link to={`/write/add/${articleId}`} className="ant-btn">
               修改
             </Link>
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, useReducer } from "react";
+import { Link } from "react-router-dom";
 import { Comment, message } from "antd";
 import { Element } from "react-scroll";
 import CommentList from "./CommentList";
@@ -32,7 +33,7 @@ function ArticleComment(props) {
 
   //监测后台提交是否为真,为真重新ajax数据
   useEffect(() => {
-    getCommentsResult();
+    getCommentsResult(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitting, commentsConfig.show]);
 
   async function submitComment() {
@@ -63,17 +64,34 @@ function ArticleComment(props) {
     <div className="comment-container">
       <CommentContext.Provider value={{ commentsConfig, dispatch }}>
         <Element name="comment" className="element">
-          <Comment
-            content={
-              <ReplyEditor
-                onChange={(e) => setValue(e.target.value)}
-                onSubmit={handleSubmit}
-                submitting={submitting}
-                value={value}
-                userContext={userContext}
-              />
-            }
-          />
+          {!userContext.user && (
+            <div
+              style={{
+                margin: "15px auto",
+                width: "100%",
+                height: "10rem",
+                textAlign: "center",
+                verticalAlign: "center",
+                backgroundColor: "#f6f6f6",
+                lineHeight: "10rem",
+              }}
+            >
+              <Link to="/sign-up">快注册账号发表评论吧!</Link>
+            </div>
+          )}
+          {userContext.user && (
+            <Comment
+              content={
+                <ReplyEditor
+                  onChange={(e) => setValue(e.target.value)}
+                  onSubmit={handleSubmit}
+                  submitting={submitting}
+                  value={value}
+                  userContext={userContext}
+                />
+              }
+            />
+          )}
         </Element>
 
         <CommentList {...props} />

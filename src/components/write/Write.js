@@ -5,7 +5,6 @@ import WriteArticle from "./WriteArticle";
 import Management from "./Management";
 import UserManagement from "./UserManagement";
 import ImgManagement from "./ImgManagement";
-import Modified from "./Modified";
 import Title from "../common/Title";
 import SvgIcon from "../common/SvgIcon";
 import "braft-editor/dist/index.css";
@@ -35,7 +34,7 @@ function Write(props) {
             key="write"
             icon={<SvgIcon type="fabiao1" className="icon--small" />}
           >
-            <Link to="/write/add-article">创作文章</Link>
+            <Link to="/write/add/new">创作文章</Link>
           </Menu.Item>
           <Menu.Item
             key="articles"
@@ -53,7 +52,7 @@ function Write(props) {
             key="tag"
             icon={<SvgIcon type="zhuce" className="icon--small" />}
           >
-            <Link to="/write/manage-img">封面更换</Link>
+            <Link to="/write/manage-img">封面选择</Link>
           </Menu.Item>
         </Menu>
       </Sider>
@@ -64,13 +63,11 @@ function Write(props) {
             style={{ padding: 24, minHeight: 360 }}
           >
             <Switch>
-              <Route path="/write/changeArticle/:id" component={Modified} />
-              <Route path="/write/add-article" component={WriteArticle} />
+              <Route path="/write/add/:id" component={WriteArticle} />
               <Route path="/write/manage-img" component={ImgManagement} />
               <Route path="/write/manage-articles" component={Management} />
               <Route path="/write/manage-users" component={UserManagement} />
-
-              <Redirect from="/write" to="/write/add-article" />
+              <Redirect from="/write" to="/write/add/new" />
             </Switch>
           </div>
         </Content>

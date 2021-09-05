@@ -37,7 +37,7 @@ function Interactive(props) {
     return () => {
       Events.scrollEvent.remove("begin");
       Events.scrollEvent.remove("end");
-    };
+    }; // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userContext.user]);
 
   async function handleLiked() {

@@ -6,7 +6,7 @@ import avatar from "../../assets/avatar.png";
 import "./siderbar.less";
 
 function SiderBar(props) {
-  const data = ["Node", "Js", "Http", "React", "MongoDB", "Webpack"];
+  const data = ["node", "js", "http", "react", "mongoDB", "webpack"];
 
   return (
     <div className="card siderbar">

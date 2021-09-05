@@ -55,7 +55,7 @@ function Header(props) {
             <Link to="/tags/technology">技术篇</Link>
           </Menu.Item>
           <Menu.Item key="life" icon={<FolderOpenOutlined />}>
-            <Link to="/tags/life">技术篇</Link>
+            <Link to="/tags/life">生活篇</Link>
           </Menu.Item>
           <Menu.Item key="author" icon={<UserOutlined />}>
             <Link to="/me">关于博主</Link>

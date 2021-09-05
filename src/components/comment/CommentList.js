@@ -13,7 +13,7 @@ function CommentList(props) {
   }
 
   useEffect(() => {
-    setComments();
+    setComments(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [commentContext.commentsConfig.comments]);
 
   function handleCommit(commentId, uid) {

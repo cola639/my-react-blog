@@ -14,7 +14,7 @@ function Tag(props) {
   }
 
   useEffect(() => {
-    getCategory();
+    getCategory(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);
 
   return (
@@ -55,11 +55,13 @@ function Tag(props) {
                 </Space>,
               ]}
               extra={
-                <img
-                  style={{ width: "20rem" }}
-                  alt="logo"
-                  src={`${imgUrl}${item.img}`}
-                />
+                item.img ? (
+                  <img
+                    style={{ width: "22rem" }}
+                    alt="logo"
+                    src={`${imgUrl}${item.img}`}
+                  />
+                ) : null
               }
             >
               <List.Item.Meta

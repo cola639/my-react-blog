@@ -5,6 +5,7 @@ import Header from "../header/Header";
 import Center from "../content/Center";
 import Footer from "../common/Footer";
 import BackTop from "../common/BackTop";
+import Title from "../common/Title";
 import auth from "../../services/authService";
 import { github } from "../../services/userService";
 import "./home.less";
@@ -28,11 +29,12 @@ function Home(props) {
   }
 
   useEffect(() => {
-    githubLgoin();
+    githubLgoin(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
+      <Title title="博客主页" />
       <Header {...props} />
 
       {query.code && (

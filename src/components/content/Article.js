@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
-import { List, Space, Divider, Spin } from "antd";
+import { List, Space, Divider } from "antd";
 import SvgIcon from "../common/SvgIcon";
 import { getFirstList, getMoreList } from "../../services/articleService";
 import { imgUrl } from "../../services/config.json";
@@ -36,20 +36,6 @@ function Article(props) {
     setArticleList(newArticleList);
     setLoading(false);
   }
-
-  if (!articleList.length)
-    return (
-      <Spin
-        size="large"
-        style={{
-          position: "fixed",
-          top: "10rem",
-          left: "50%",
-          zIndex: "999",
-          fontSize: "50px",
-        }}
-      />
-    );
 
   return (
     <section className="card article-container">
@@ -96,11 +82,13 @@ function Article(props) {
                   </Space>,
                 ]}
                 extra={
-                  <img
-                    style={{ width: "22rem" }}
-                    alt="logo"
-                    src={`${imgUrl}${item.img}`}
-                  />
+                  item.img ? (
+                    <img
+                      style={{ width: "22rem" }}
+                      alt="logo"
+                      src={`${imgUrl}${item.img}`}
+                    />
+                  ) : null
                 }
               >
                 <List.Item.Meta

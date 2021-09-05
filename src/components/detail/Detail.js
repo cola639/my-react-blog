@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import { Row, Col, Spin } from "antd";
+import { Row, Col } from "antd";
 import Header from "../header/Header";
 import Interactive from "./Interactive";
 import Content from "./Content";
@@ -11,7 +11,6 @@ import Title from "../common/Title";
 import BackTop from "../common/BackTop";
 import DetailContext from "../../context/DetailContext";
 import { getArticle } from "../../services/articleService";
-
 import "./detail.less";
 
 function Detail(props) {
@@ -29,7 +28,7 @@ function Detail(props) {
   }
 
   useEffect(() => {
-    getArticleDetail();
+    getArticleDetail(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -37,27 +36,16 @@ function Detail(props) {
       <DetailContext.Provider value={{ article }}>
         <Title title={article.title} />
         <Header />
-
         <Row
-          className="container--big block  main detail-container"
+          className="main container--big block detail-container"
           justify="space-between"
         >
           <Interactive {...props} />
+
           <Col xs={24} sm={17} md={17} lg={17} xl={16}>
-            {!article.content && (
-              <Spin
-                tip="加载中"
-                size="large"
-                style={{
-                  position: "fixed",
-                  top: "10rem",
-                  left: "50%",
-                  zIndex: "999",
-                }}
-              />
-            )}
-            {article.content && article.img && <Content {...props} />}
+            <Content {...props} />
           </Col>
+
           <Col xs={0} sm={6} md={6} lg={6} xl={7} className="detail-siderbar">
             <SiderBar />
             <Navigation />

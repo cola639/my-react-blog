@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import moment from "moment";
 import { Comment, Avatar } from "antd";
+import UserContext from "../../context/UserContext";
 
 function CustomComment({ comment, onCommit }) {
+  const userContext = useContext(UserContext);
+
   return (
     <Comment
       id={comment._id}
       actions={[
-        <span onClick={() => onCommit(comment._id, comment.comment_uid)}>
-          回复
-        </span>,
+        userContext.user ? (
+          <span onClick={() => onCommit(comment._id, comment.comment_uid)}>
+            回复
+          </span>
+        ) : null,
       ]}
       author={comment.comment_uid.name}
       avatar={<Avatar size={36}>{comment.comment_uid.name}</Avatar>}
@@ -23,9 +28,11 @@ function CustomComment({ comment, onCommit }) {
             <Comment
               key={child._id}
               actions={[
-                <span onClick={() => onCommit(child._id, child.comment_uid)}>
-                  回复
-                </span>,
+                userContext.user ? (
+                  <span onClick={() => onCommit(child._id, child.comment_uid)}>
+                    回复
+                  </span>
+                ) : null,
               ]}
               author={
                 <>

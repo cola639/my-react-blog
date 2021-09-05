@@ -1,21 +1,20 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Form, Input, Checkbox, Modal, Button, Divider } from "antd";
 import SvgIcon from "../common/SvgIcon";
-import DetailContext from "../../context/DetailContext";
 import auth from "../../services/authService";
 import { oauth_url, client_id } from "../../services/config.json";
 
 //从Header.js组件导入
 function Login({ visible, onOk, onCancel }) {
-  const detailContext = useContext(DetailContext);
-
   const [error, setError] = useState("");
 
   async function onFinish(values) {
     try {
+      const previousPath = window.location.href;
+
       await auth.login(values.email, values.password);
 
-      window.location = detailContext ? detailContext.location.pathname : "/";
+      window.location = previousPath;
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         setError(ex.response.data);
