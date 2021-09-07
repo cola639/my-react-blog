@@ -14,12 +14,14 @@ function Search(props) {
 
     const { data: result } = await searchArticles(query.name);
 
-    //遍历点亮关键词;
-    result.map((item) => {
-      item.title = brightKeyword(query.name, item.title);
-      item.author = brightKeyword(query.name, item.author.name);
-      return (item.content = brightKeyword(query.name, item.content));
-    });
+    if (result) {
+      //遍历点亮关键词;
+      result.map((item) => {
+        item.title = brightKeyword(query.name, item.title);
+        item.author = brightKeyword(query.name, item.author.name);
+        return (item.content = brightKeyword(query.name, item.content));
+      });
+    }
 
     setSearchResult(result);
   }
@@ -66,11 +68,13 @@ function Search(props) {
                 </Space>,
               ]}
               extra={
-                <img
-                  style={{ width: "22rem" }}
-                  alt="logo"
-                  src={`${imgUrl}${item.img}`}
-                />
+                item.img ? (
+                  <img
+                    style={{ width: "22rem" }}
+                    alt="logo"
+                    src={`${imgUrl}${item.img}`}
+                  />
+                ) : null
               }
             >
               <List.Item.Meta

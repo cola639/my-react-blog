@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import queryString from "query-string";
 import { message, Spin } from "antd";
 import Header from "../header/Header";
-import Center from "../content/Center";
+import Center from "./Center";
 import Footer from "../common/Footer";
 import BackTop from "../common/BackTop";
 import Title from "../common/Title";

@@ -1,20 +1,26 @@
 .body_back {
-  align-items: center;
   background: linear-gradient(90deg, #a0d7e7, #6c5dd3);
+}
+
+.register-container {
   display: flex;
-  height: 900px;
   justify-content: center;
-  margin: auto;
-  padding: 150px;
-  text-align: center;
+  align-items: center;
+  padding: 0.5rem 0.5rem;
 }
 
 .register__card {
   background: #f2f3f7;
   border-radius: 12px;
   justify-content: center;
-  margin: auto;
-  padding: 50px 60px;
+  margin: 3rem 3rem;
+  padding: 1.5rem 1.5rem;
   text-align: center;
-  width: 60rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .register__card {
+    width: 70vw;
+    margin: 5vw auto;
+  }
 }

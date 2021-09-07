@@ -42,7 +42,8 @@ function Me(props) {
             </li>
 
             <li>
-              熟悉React并理解其原理,熟悉React全家桶用法.
+              熟悉React并了解其原理,熟练运React + react-router-dom +
+              create-react-app + axios + hooks + redux.
               <Rate allowHalf defaultValue={4} className="me-skill_rate" />
             </li>
             <li>

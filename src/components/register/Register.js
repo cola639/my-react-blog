@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { Form, Input, Checkbox, Button, Divider } from "antd";
+import { Form, Input, Checkbox, Button, Divider, Row, Col } from "antd";
 import SvgIcon from "../common/SvgIcon";
 import { register } from "../../services/userService";
 import auth from "../../services/authService";
@@ -37,9 +37,11 @@ function Register(props) {
   if (auth.getCurrentUser()) return <Redirect to="/" />;
 
   return (
-    <React.Fragment>
-      <div className="register__card">
-        <h2>注册用户</h2>
+    <Row className="register-container">
+      <Col xs={24} sm={24} md={18} lg={10} xl={6} className="register__card">
+        <h2>
+          <Link to="/">回首页</Link>
+        </h2>
         <Form
           name="basic"
           onFinish={onFinish}
@@ -54,7 +56,7 @@ function Register(props) {
               },
             ]}
           >
-            <Input size="large" placeholder="输入用户名" />
+            <Input size="large" placeholder="输入用户名" autoFocus />
           </Form.Item>
           <Form.Item
             name="password"
@@ -97,7 +99,6 @@ function Register(props) {
           >
             <Input type="password" size="large" placeholder="确认您的密码" />
           </Form.Item>
-
           <Form.Item
             name="email"
             rules={[
@@ -109,7 +110,6 @@ function Register(props) {
           >
             <Input size="large" placeholder="输入邮箱地址" />
           </Form.Item>
-
           <Form.Item>
             <Button
               type="primary"
@@ -143,6 +143,7 @@ function Register(props) {
             </Checkbox>
           </Form.Item>
         </Form>
+
         {error && <span style={{ color: "red" }}>{error}</span>}
         <Divider>Github授权登陆</Divider>
         <button
@@ -151,8 +152,8 @@ function Register(props) {
         >
           <SvgIcon type="git" />
         </button>
-      </div>
-    </React.Fragment>
+      </Col>
+    </Row>
   );
 }
 

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Drawer, Menu } from "antd";
 import {
+  HomeOutlined,
   EditOutlined,
   FolderOpenOutlined,
   UserOutlined,
@@ -9,14 +11,17 @@ import {
 
 const menu = (
   <Menu>
-    <Menu.Item key="video" icon={<EditOutlined />}>
-      <a href="/">技术篇</a>
+    <Menu.Item key="home" icon={<HomeOutlined />}>
+      <Link to="/">主页</Link>
     </Menu.Item>
-    <Menu.Item key="article" icon={<FolderOpenOutlined />}>
-      <a href="/">生活篇</a>
+    <Menu.Item key="technology" icon={<EditOutlined />}>
+      <Link to="/tags/technology">技术篇</Link>
+    </Menu.Item>
+    <Menu.Item key="life" icon={<FolderOpenOutlined />}>
+      <Link to="/tags/life">生活篇</Link>
     </Menu.Item>
     <Menu.Item key="author" icon={<UserOutlined />}>
-      <a href="/">关于作者</a>
+      <Link to="/me">关于博主</Link>
     </Menu.Item>
   </Menu>
 );
@@ -32,7 +37,7 @@ function DropDown(props) {
         <MenuOutlined className="nav__toggler" />
       </button>
       <Drawer
-        width="40%"
+        width="45%"
         placement="left"
         closable={false}
         onClose={() => {
