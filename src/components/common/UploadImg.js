@@ -1,5 +1,5 @@
 import React from "react";
-import { Upload, Modal, message } from "antd";
+import { Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { putImg } from "../../services/articleService";
 import { apiUrl } from "../../services/config.json";
@@ -49,7 +49,7 @@ class UploadImg extends React.Component {
       const { data: result } = await putImg(this.props.articleId, { url });
 
       if (result.msg) {
-        message.success("更换封面图成功,刷新查看");
+        window.location = window.location.pathname;
       }
     } catch (error) {}
   };

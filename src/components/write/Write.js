@@ -29,7 +29,7 @@ function Write(props) {
           首页
         </a>
 
-        <Menu theme="dark" defaultSelectedKeys={["write"]} mode="inline">
+        <Menu theme="dark" mode="inline">
           <Menu.Item
             key="write"
             icon={<SvgIcon type="fabiao1" className="icon--small" />}

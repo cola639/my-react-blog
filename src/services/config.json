@@ -1,5 +1,5 @@
 {
-  "apiUrl": "http://localhost:3100/api",
+  "apiUrl": "http://107.182.25.151:3200/api",
   "imgUrl": "http://localhost:3100/static/imgs/",
   "oauth_url": "https://github.com/login/oauth/authorize",
   "client_id": "2b1ecf2a5335ff97b985",

@@ -44,7 +44,7 @@ function WriteArticle(props) {
   const [articleContent, setArticleContent] = useState("");
   const [description, setDescription] = useState("");
   const [markdownContent, setMarkdownContent] = useState("预览内容");
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState();
 
   useEffect(() => {
     populateArticle();
@@ -58,9 +58,11 @@ function WriteArticle(props) {
 
       const { data: article } = await getArticle(articleId);
 
+      console.log(article.category, typeof article.category);
       setArticleTitle(article.title);
       setArticleContent(article.content);
       setDescription(article.description);
+      setCategory(article.category);
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         props.history.replace("/not-found");
@@ -133,6 +135,7 @@ function WriteArticle(props) {
                 style={{ maxWidth: "10rem", color: "#000" }}
                 placeholder="文章分类"
                 defaultValue={category}
+                value={category}
                 options={options}
                 onChange={(type) => setCategory(type)}
               />
