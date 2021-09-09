@@ -2,6 +2,9 @@ import axios from "axios";
 import { message } from "antd";
 import logger from "./logService";
 
+//axios请求路径
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
 //axios拦截器
 axios.interceptors.response.use(null, (error) => {
   const expectedError =

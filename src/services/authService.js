@@ -1,19 +1,11 @@
 import jwtDecode from "jwt-decode";
 import http from "./httpService"; //面向对象导入,使用http.get
-import { apiUrl } from "./config.json";
 
-const apiEndpoint = apiUrl + "/auth";
-// const githubEndpoint = apiUrl + "/github/callback";
+const apiEndpoint = "/auth";
 
 const tokenKey = "token";
 
 http.setJwt(getJwt());
-
-// export async function loginGithub(code) {
-//   console.log(githubEndpoint, code);
-//   const { data: jwt } = await http.post(githubEndpoint, code);
-//   localStorage.setItem("token", jwt);
-// }
 
 export async function login(email, password) {
   const { data: jwt } = await http.post(apiEndpoint, { email, password });

@@ -24,14 +24,11 @@ function Content(props) {
       </nav>
       {article.content ? (
         <div className=" card blcok--white article">
-          {article.img ? (
-            <img
-              className="article__img"
-              style={{ width: "22rem" }}
-              alt="header img"
-              src={`${imgUrl}${article.img}`}
-            />
-          ) : null}
+          <div className="article__img">
+            {article.img ? (
+              <img alt="header img" src={`${imgUrl}${article.img}`} />
+            ) : null}
+          </div>
           <div>
             <h2 className="article__title">{article.title}</h2>
             <div className="article__list">

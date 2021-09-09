@@ -3,6 +3,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import { List, Space, Divider } from "antd";
 import SvgIcon from "../common/SvgIcon";
 import { getFirstList, getMoreList } from "../../services/articleService";
+import debounce from "../../utils/debounce";
 import { imgUrl } from "../../services/config.json";
 
 function Article(props) {
@@ -16,8 +17,10 @@ function Article(props) {
 
   async function getFirstPage() {
     const { data: FirstPage } = await getFirstList();
-
     setArticleList(FirstPage);
+
+    //小于9条数据显示底线
+    if (FirstPage.length < 9) setHasMore(false);
   }
 
   async function moreData() {
@@ -41,7 +44,7 @@ function Article(props) {
     <section className="card article-container">
       <InfiniteScroll
         initialLoad={false}
-        loadMore={moreData}
+        loadMore={debounce(moreData, 1000)}
         hasMore={!loading && hasMore} //是否有更多,设为false下来不会再产生网络请求
         useWindow={true} //是否使用浏览器滑动条或组件UI内部滑动条默认为true
       >

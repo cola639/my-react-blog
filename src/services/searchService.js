@@ -1,7 +1,6 @@
 import http from "./httpService";
-import { apiUrl } from "./config.json";
 
-const apiEndpoint = apiUrl + "/articles";
+const apiEndpoint = "/articles";
 
 //获取分类
 export function searchCategory(category) {
