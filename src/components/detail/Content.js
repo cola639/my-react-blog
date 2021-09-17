@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import moment from "moment";
 import { Breadcrumb, Skeleton } from "antd";
-import SvgIcon from "../common/SvgIcon";
 import ArticleComment from "../comment/ArticleComment";
 import DetailContext from "../../context/DetailContext";
 import MarkdownData from "../../utils/markdown";
@@ -32,15 +31,16 @@ function Content(props) {
           <div>
             <h2 className="article__title">{article.title}</h2>
             <div className="article__list">
-              <SvgIcon className="icon article__list__item" type="astronaut" />
-              {article.author ? article.author.name : ""}
               <time
                 dateTime={moment(article.time).format("YYYY-MM-DD HH:mm")}
                 style={{ marginLeft: "12px" }}
               >
-                <span>Time: </span>
+                <span>发布时间 </span>
                 {moment(article.time).format("YYYY-MM-DD HH:mm")}
               </time>
+              <span className="article__author">
+                作者:{article.author ? article.author.name : ""}{" "}
+              </span>
             </div>
             <article
               className="article__content"

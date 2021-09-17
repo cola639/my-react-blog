@@ -10,7 +10,7 @@ const { TextArea } = Input;
 
 const options = [
   {
-    value: "technology",
+    value: "技术",
     label: "技术",
     children: [
       {
@@ -29,10 +29,18 @@ const options = [
         value: "react",
         label: "react",
       },
+      {
+        value: "webpack",
+        label: "webpack",
+      },
+      {
+        value: "mongoDB",
+        label: "mongoDB",
+      },
     ],
   },
   {
-    value: "life",
+    value: "生活",
     label: "生活",
   },
 ];
@@ -40,11 +48,12 @@ const options = [
 function WriteArticle(props) {
   const userContext = useContext(UserContext);
 
+  const [articleId, setArticleId] = useState("");
   const [articleTitle, setArticleTitle] = useState("");
   const [articleContent, setArticleContent] = useState("");
   const [description, setDescription] = useState("");
   const [markdownContent, setMarkdownContent] = useState("预览内容");
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState([]);
 
   useEffect(() => {
     populateArticle();
@@ -58,11 +67,12 @@ function WriteArticle(props) {
 
       const { data: article } = await getArticle(articleId);
 
-      console.log(article.category, typeof article.category);
+      setArticleId(article._id);
       setArticleTitle(article.title);
       setArticleContent(article.content);
       setDescription(article.description);
       setCategory(article.category);
+      setMarkdownContent(MarkdownData(article.content));
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         props.history.replace("/not-found");
@@ -70,7 +80,9 @@ function WriteArticle(props) {
   }
 
   async function handleSubmit() {
+    handleDeleteDraft();
     const newArticle = {
+      _id: articleId,
       author: userContext.user._id,
       title: articleTitle,
       description: description,
@@ -87,6 +99,7 @@ function WriteArticle(props) {
       setArticleContent("");
       setDescription("");
       setMarkdownContent("");
+
       message.success("发布成功");
     } catch (error) {
       message.warn(error.response.data);
@@ -95,10 +108,12 @@ function WriteArticle(props) {
 
   function handleGetDraft() {
     if (userContext.user._id === localStorage.getItem("author")) {
+      setArticleId(localStorage.getItem("articleId"));
       setArticleTitle(localStorage.getItem("title"));
       setArticleContent(localStorage.getItem("content"));
       setDescription(localStorage.getItem("description"));
-      setCategory(localStorage.getItem("category"));
+      setCategory([localStorage.getItem("category")]);
+      setMarkdownContent(MarkdownData(localStorage.getItem("content")));
     }
   }
 
@@ -109,11 +124,21 @@ function WriteArticle(props) {
   }
 
   function handleDraft() {
+    localStorage.setItem("articleId", articleId);
     localStorage.setItem("author", userContext.user._id);
     localStorage.setItem("title", articleTitle);
     localStorage.setItem("description", description);
     localStorage.setItem("content", articleContent);
     localStorage.setItem("category", category);
+  }
+
+  function handleDeleteDraft() {
+    localStorage.removeItem("articleId");
+    localStorage.removeItem("author");
+    localStorage.removeItem("title");
+    localStorage.removeItem("description");
+    localStorage.removeItem("content");
+    localStorage.removeItem("category");
   }
 
   return (

@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { Button, Modal, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 
-function Search(props) {
+const { Search } = Input;
+
+function SearchInput(props) {
   const [isVisible, setIsVisible] = useState(false);
 
-  function handleSearch(e) {
-    if (!e.currentTarget.value.trim()) return;
+  function handleSearch(value) {
+    if (!value.trim()) return;
     setIsVisible(false);
-    props.history.push(`/search?name=${e.currentTarget.value}`);
+    props.history.push(`/search?name=${value}`);
   }
 
   return (
@@ -30,21 +32,26 @@ function Search(props) {
         onCancel={() => {
           setIsVisible(false);
         }}
+        closable={false}
         destroyOnClose
-        centered //居中
+        centered
         width={600}
         footer={null} //取消底部多余显示
-        style={{ textAlign: "center", borderRadius: "12px", top: "-50vw" }}
+        style={{
+          textAlign: "center",
+          top: "-50vw",
+        }}
       >
-        <Input
-          placeholder="Enter your search"
-          prefix={<SearchOutlined />}
-          bordered={false}
-          onPressEnter={handleSearch}
+        <Search
+          placeholder="input search text"
+          enterButton="Search"
+          allowClear
+          size="large"
+          onSearch={handleSearch}
         />
       </Modal>
     </React.Fragment>
   );
 }
 
-export default Search;
+export default SearchInput;

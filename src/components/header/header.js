@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import DropDown from "./DropDown";
 import SvgIcon from "../common/SvgIcon";
-import MobileSearch from "./MobileSearch";
+import SearchInput from "./SearchInput";
 import Login from "../login/Login";
 import UserContext from "../../context/UserContext";
 import logo from "../../assets/logo.png";
@@ -52,10 +52,10 @@ function Header(props) {
             <Link to="/">主页</Link>
           </Menu.Item>
           <Menu.Item key="technology" icon={<EditOutlined />}>
-            <Link to="/tags/technology">技术篇</Link>
+            <Link to="/tags/技术">技术篇</Link>
           </Menu.Item>
           <Menu.Item key="life" icon={<FolderOpenOutlined />}>
-            <Link to="/tags/life">生活篇</Link>
+            <Link to="/tags/生活">生活篇</Link>
           </Menu.Item>
           <Menu.Item key="author" icon={<UserOutlined />}>
             <Link to="/me">关于博主</Link>
@@ -123,7 +123,7 @@ function Header(props) {
         className="header__mobile__search"
         id="dropdown-header"
       >
-        <MobileSearch {...props} />
+        <SearchInput {...props} />
       </Col>
 
       <Login

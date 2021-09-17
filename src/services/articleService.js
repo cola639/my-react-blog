@@ -37,7 +37,7 @@ export function saveArticle(article) {
     delete body._id;
     return http.put(articleUrl(article._id), body);
   }
-
+  delete article._id;
   return http.post(apiEndpoint, article);
 }
 

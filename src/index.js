@@ -4,6 +4,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "antd/dist/antd.css";
+import "highlight.js/styles/atom-one-dark.css";
 import "./index.less";
 
 ReactDOM.render(

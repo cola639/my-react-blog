@@ -15,10 +15,10 @@ const menu = (
       <Link to="/">主页</Link>
     </Menu.Item>
     <Menu.Item key="technology" icon={<EditOutlined />}>
-      <Link to="/tags/technology">技术篇</Link>
+      <Link to="/tags/技术">技术篇</Link>
     </Menu.Item>
     <Menu.Item key="life" icon={<FolderOpenOutlined />}>
-      <Link to="/tags/life">生活篇</Link>
+      <Link to="/tags/生活">生活篇</Link>
     </Menu.Item>
     <Menu.Item key="author" icon={<UserOutlined />}>
       <Link to="/me">关于博主</Link>
