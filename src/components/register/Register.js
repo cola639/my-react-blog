@@ -72,6 +72,7 @@ function Register(props) {
               type="password"
               size="large"
               placeholder="输入用户密码"
+              autoComplete="off"
             />
           </Form.Item>
           <Form.Item
@@ -97,7 +98,12 @@ function Register(props) {
               }),
             ]}
           >
-            <Input type="password" size="large" placeholder="确认您的密码" />
+            <Input
+              type="password"
+              size="large"
+              placeholder="确认您的密码"
+              autoComplete="off"
+            />
           </Form.Item>
           <Form.Item
             name="email"
