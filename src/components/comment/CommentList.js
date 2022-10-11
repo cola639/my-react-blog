@@ -1,30 +1,30 @@
-import React, { useContext, useEffect, useState } from "react";
-import CustomComment from "./CustomComment";
-import ModalComment from "./ModalComment";
-import CommentContext from "../../context/CommentContext";
-import { transformTree } from "../../utils/treeToList";
+import React, { useContext, useEffect, useState } from 'react'
+import CustomComment from './CustomComment'
+import ModalComment from './ModalComment'
+import CommentContext from '../../context/CommentContext'
+import { transformTree } from '../../utils/treeToList'
 
 function CommentList(props) {
-  const commentContext = useContext(CommentContext);
-  const [mapComments, setMapComments] = useState([]);
+  const commentContext = useContext(CommentContext)
+  const [mapComments, setMapComments] = useState([])
 
   function setComments() {
-    setMapComments(transformTree(commentContext.commentsConfig.comments));
+    setMapComments(transformTree(commentContext.commentsConfig.comments))
   }
 
   useEffect(() => {
-    setComments(); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [commentContext.commentsConfig.comments]);
+    setComments() // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [commentContext.commentsConfig.comments])
 
   function handleCommit(commentId, uid) {
     const action = {
-      type: "modal_comment",
+      type: 'modal_comment',
       commentId,
       to_uid: uid._id,
       show: true,
-    };
+    }
 
-    commentContext.dispatch(action);
+    commentContext.dispatch(action)
   }
 
   return (
@@ -37,11 +37,11 @@ function CommentList(props) {
             comment={comment}
             onCommit={handleCommit}
           />
-        );
+        )
       })}
       <ModalComment {...props} />
     </>
-  );
+  )
 }
 
-export default CommentList;
+export default CommentList

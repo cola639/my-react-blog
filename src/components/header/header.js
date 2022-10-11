@@ -1,29 +1,29 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import { Row, Col, Menu, Input, Button, Avatar, Dropdown } from "antd";
+import React, { useState, useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { Row, Col, Menu, Input, Button, Avatar, Dropdown } from 'antd'
 import {
   HomeOutlined,
   EditOutlined,
   FolderOpenOutlined,
   UserOutlined,
   SearchOutlined,
-} from "@ant-design/icons";
-import DropDown from "./DropDown";
-import SvgIcon from "../common/SvgIcon";
-import SearchInput from "./SearchInput";
-import Login from "../login/Login";
-import UserContext from "../../context/UserContext";
-import logo from "../../assets/logo.png";
-import "./header.less";
+} from '@ant-design/icons'
+import DropDown from './DropDown'
+import SvgIcon from '../common/SvgIcon'
+import SearchInput from './SearchInput'
+import Login from '../login/Login'
+import UserContext from '../../context/UserContext'
+import logo from '../../assets/logo.png'
+import './header.less'
 
 function Header(props) {
-  const userContext = useContext(UserContext);
+  const userContext = useContext(UserContext)
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   function handleSearch(e) {
-    if (!e.currentTarget.value.trim()) return;
-    props.history.push(`/search?name=${e.currentTarget.value}`);
+    if (!e.currentTarget.value.trim()) return
+    props.history.push(`/search?name=${e.currentTarget.value}`)
   }
 
   return (
@@ -67,7 +67,7 @@ function Header(props) {
           <Button
             type="primary"
             onClick={() => {
-              setIsModalVisible(true);
+              setIsModalVisible(true)
             }}
           >
             登陆
@@ -88,20 +88,20 @@ function Header(props) {
                   </Menu.Item>
                 </Menu>
               }
-              trigger={["click"]}
+              trigger={['click']}
             >
               <span className="author-avatar">
                 {userContext.user.avatar && (
                   <Avatar
                     size={32}
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: 'pointer' }}
                     src={userContext.user.avatar}
                   />
                 )}
                 {!userContext.user.avatar && (
                   <Avatar
                     size={32}
-                    style={{ cursor: "pointer", backgroundColor: "#87d068" }}
+                    style={{ cursor: 'pointer', backgroundColor: '#87d068' }}
                     icon={<SvgIcon type="monkey" />}
                   />
                 )}
@@ -129,14 +129,14 @@ function Header(props) {
       <Login
         visible={isModalVisible}
         onOk={() => {
-          setIsModalVisible(false);
+          setIsModalVisible(false)
         }}
         onCancel={() => {
-          setIsModalVisible(false);
+          setIsModalVisible(false)
         }}
       />
     </Row>
-  );
+  )
 }
 
-export default Header;
+export default Header
